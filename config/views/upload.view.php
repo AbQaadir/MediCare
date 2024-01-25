@@ -35,7 +35,7 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
     $html .= "<div class='product-price'>LKR ".$productPrice."</div>";
     $html .= "</div>";
 
-    echo $html
+    echo $html;
 }
 
 function showAllPromotion(){
