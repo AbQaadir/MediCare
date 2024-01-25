@@ -35,12 +35,13 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
     $html .= "<div class='product-price'>LKR ".$productPrice."</div>";
     $html .= "</div>";
 
-    echo $html
+    echo $html;
 }
 
 function showAllPromotion(){
     $promotion = $_SESSION["Promotion"];
     foreach ($promotion as $row) {
+        $id = $row["id"];
         $imageSrc = "uploads/". $row["fileName"];
         $productLink = "product-info.php";
         $productName = $row["productName"];
@@ -52,43 +53,47 @@ function showAllPromotion(){
 function showAllHeart(){
     $heart = $_SESSION["Heart"];
     foreach ($heart as $row) {
+        $id = $row["id"];
         $imageSrc = "uploads/". $row["fileName"];
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR ".$row["price"];
-        generateProductHTML($imageSrc, $productLink, $productName, $productPrice);
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
 
 function showAllEyes(){
     $eyes = $_SESSION["Eyes"];
     foreach ($eyes as $row) {
+        $id = $row["id"];
         $imageSrc = "uploads/". $row["fileName"];
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR ".$row["price"];
-        generateProductHTML($imageSrc, $productLink, $productName, $productPrice);
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
 
 function showAllPersonalCare() {
     $personalCare = $_SESSION["PersonalCare"];
     foreach ($personalCare as $row) {
+        $id = $row["id"];
         $imageSrc = "uploads/". $row["fileName"];
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR ".$row["price"];
-        generateProductHTML($imageSrc, $productLink, $productName, $productPrice);
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
 
 function showAllDiabetes() {
     $diabetes = $_SESSION["Diabetes"];
     foreach ($diabetes as $row) {
+        $id = $row["id"];
         $imageSrc = "uploads/". $row["fileName"];
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR ".$row["price"];
-        generateProductHTML($imageSrc, $productLink, $productName, $productPrice);
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
