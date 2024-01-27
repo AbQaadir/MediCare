@@ -1,28 +1,26 @@
-<?php
-require_once 'config/config-session.php';
-require_once 'config/views/upload.view.php';
+<?php 
+    require_once 'config/config-session.php';
+    require_once 'config/views/upload.view.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <title>Product Information</title>
     <style>
-
+        
     </style>
 
 </head>
-
 <body>
     <div class="container">
-        <?php
-        checkUploadErrors();
-        ?>
-
+    <?php 
+        checkUploadErrors(); 
+    ?>
+    
         <div class="mb-3 col-md-5 mx-auto">
             <h1 class="mt-4">New Products</h1>
         </div>
@@ -35,11 +33,11 @@ require_once 'config/views/upload.view.php';
             <div class="mb-3 col-md-5 mx-auto">
                 <label for="category" class="form-label">Category:</label>
                 <select class="form-select" id="category" name="category">
-                    <option value="promotion">Promotion</option>
-                    <option value="heart">Heart</option>
-                    <option value="eyes">Eyes</option>
-                    <option value="personal-care">Personal Care</option>
-                    <option value="diabetes">Diabetes</option>
+                    <option value="cosmetics">Promotion</option>
+                    <option value="women">Heart</option>
+                    <option value="kids">Eyes</option>
+                    <option value="accessories">Personal Care</option>
+                    <option value="essential">Diabetes</option>
                 </select>
             </div>
 
@@ -57,11 +55,10 @@ require_once 'config/views/upload.view.php';
                 <label for="productImage" class="form-label col-md-6 mx-auto">Choose a Product Image (550 X 750):</label>
                 <input type="file" class="form-control col-md-6 mx-auto" id="productImage" name="productImage" accept="image/*" required>
             </div>
-            <div class="mb-3 col-md-5 mx-auto">
+            <div class="mb-3 col-md-5 mx-auto" >
                 <button type="submit" class="btn btn-primary col-md-5 mx-auto" name="submit">Submit</button>
             </div>
         </form>
     </div>
 </body>
-
 </html>

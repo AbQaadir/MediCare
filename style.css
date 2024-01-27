@@ -282,8 +282,8 @@ footer {
 
 /* news subscription */
 .shop-newsletter {
-    background-color: #f7f7f7;
-    padding: 40px 0;
+	background-color: #f7f7f7;
+	padding: 40px 0;
 }
 
 /* .shop-newsletter .inner {
@@ -301,54 +301,54 @@ footer {
 
 
 .shop-newsletter .inner h4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: #000;
-    margin-bottom: 5px;
+	font-size: 16px;
+	font-weight: 700;
+	color: #000;
+	margin-bottom: 5px;
 }
 
 .shop-newsletter .inner p {
-    font-size: 14px;
-    color: #000;
-    margin-bottom: 20px;
+	font-size: 14px;
+	color: #000;
+	margin-bottom: 20px;
 }
 
 .shop-newsletter .inner .newsletter-inner {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
     justify-content: space-between;
 }
 
 .shop-newsletter .inner .newsletter-inner input {
-    width: 100%;
+	width: 100%;
     max-width: 400px;
-    padding: 10px;
-    font-size: 14px;
-    color: #000;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
+	padding: 10px;
+	font-size: 14px;
+	color: #000;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
 }
 
 .shop-newsletter .inner .newsletter-inner button {
-    background-color: #000;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 10px;
+	background-color: #000;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-left: 10px;
 }
 
 .shop-newsletter .inner .newsletter-inner button:hover {
-    background-color: #ff0000;
-    color: #fff;
+	background-color: #ff0000;
+	color: #fff;
 }
 
-@media (max-width: 767px) {
 
+@media (max-width: 767px) {
     .shop-newsletter .inner h4,
     .shop-newsletter .inner p {
         text-align: center;

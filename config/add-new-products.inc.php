@@ -17,7 +17,7 @@ if (isset($_POST["submit"])) {
 
         // Check if either username or password is empty
         if (isUploadEmpty($file)) {
-            $errors["empty_input"] = "Fill in all fields!";
+            $errors["empty_input"] = "Fill in all fields!"; 
         }
 
         // Check if email valid
@@ -70,7 +70,7 @@ if (isset($_POST["submit"])) {
         // Initialize $pdo, $verified, and $token
         $fileNameNew = $file["name"];
         $fileDestination = "../uploads/" . $fileNameNew;
-
+        
         // If no errors, create user in the database
         createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category);
 
@@ -78,10 +78,11 @@ if (isset($_POST["submit"])) {
         $pdo = null; // Close the database connection
         $stmt = null;
         die();
+
     } catch (PDOException $e) {
         die("ERROR: Could not connect. " . $e->getMessage());
     }
 } else {
     header("Location: ../upload.php");
     exit();
-}
+} 
