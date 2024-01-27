@@ -1,0 +1,36 @@
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.product-item {
+    width: 22.5%;
+    margin-left: 27.5px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-name {
+    font-size: 18px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.product-name:hover {
+    color: #f60;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #f60;
+    margin-top: 5px;
+}
