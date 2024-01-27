@@ -55,7 +55,7 @@ require_once 'config/config-session.php';
 				<?php else : ?>
 					<li><a href="login.php">Login</a></li>
 				<?php endif; ?>
-				<li><a href="cart-new.php">Cart</a></li>
+				<li><a href="cart.php">Cart</a></li>
 
 			</ul>
 		</nav>
