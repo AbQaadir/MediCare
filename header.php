@@ -9,6 +9,7 @@ require_once 'config/config-session.php';
 	<meta charset="utf-8">
 	<title>MediCare</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="product.css">
 </head>
 
 <body>
@@ -38,7 +39,7 @@ require_once 'config/config-session.php';
 				</li>
 				<li><a href="contact-us.php">Contact Us</a></li>
 
-				
+
 
 				<?php if (isset($_SESSION["userType"])) : ?>
 					<?php if ($_SESSION["userType"] === "admin") : ?>
