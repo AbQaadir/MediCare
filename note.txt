@@ -1,0 +1,26 @@
+inset the Super Admin to the database
+
+$id = 1;
+$email = 'superadmin@example.com';
+$password = '123';
+
+$options = [
+    'cost' => 12
+];
+
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+
+// Insert the hashed password into the superAdmin table
+$query = "INSERT INTO superAdmin (id, email, pwd) VALUES (:id, :email, :pwd)";
+$stmt = $pdo->prepare($query);
+$stmt->bindParam(':id', $id);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':pwd', $hashedPassword);
+
+if ($stmt->execute()) {
+    echo 'Row inserted successfully.';
+} else {
+    echo 'Error: ' . $stmt->errorInfo()[2];
+}
+
+
