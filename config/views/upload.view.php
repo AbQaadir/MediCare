@@ -32,14 +32,16 @@ function checkUploadErrors()
 function generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice)
 {
     $html = "<div class='product-item'>";
-    $html .= "<a href='.$productLink.'><img src='" . $imageSrc . "' alt='" . $productName . "'></a>";
-    $html .= "<div class='product-name'>" . $productName . "</div>";
-    $html .= "<div class='product-price'>LKR " . $productPrice . "</div>";
-    $html .= "<input type='hidden' name='id' value='" . $id . "'>";
+    $html .= "<a href='$productLink'><img src='$imageSrc' alt='$productName'></a>";
+    $html .= "<div class='product-name'>$productName</div>";
+    $html .= "<div class='product-price'>LKR $productPrice</div>";
+    $html .= "<input type='hidden' name='id' value='$id'>";
+    $html .= "<button class='add-to-cart-btn' data-product-id='$id'>Add to Cart</button>"; // Add to Cart button
     $html .= "</div>";
 
     echo $html;
 }
+
 
 function showAllPromotion()
 {
