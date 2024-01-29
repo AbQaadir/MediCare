@@ -1,8 +1,9 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-function getUser($pdo, $email) : array|false {   
+function getUser($pdo, $email): array|false
+{
     try {
         $sql = "SELECT * FROM loginfo WHERE email = :email
                 UNION
@@ -12,7 +13,6 @@ function getUser($pdo, $email) : array|false {
         $user = $stmt->fetch();
         return $user;
     } catch (PDOException $e) {
-        // Handle database errors, log them, or return an appropriate response
         return false;
     }
 }

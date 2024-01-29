@@ -9,6 +9,7 @@ require_once 'config/config-session.php';
 	<meta charset="utf-8">
 	<title>MediCare</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="profile.css">
 	<link rel="stylesheet" href="product.css">
 </head>
 
@@ -32,21 +33,21 @@ require_once 'config/config-session.php';
 
 
 				<li><a href="index.php">Home</a></li>
-				<li><a href="#">Blog<i class="ti-angle-down"></i></a>
+				<!-- <li><a href="#">Blog<i class="ti-angle-down"></i></a>
 					<ul class="dropdown">
 						<li><a href="blog-single-sidebar.php">Blog Single Sidebar</a></li>
 					</ul>
-				</li>
+				</li> -->
 				<li><a href="contact-us.php">Contact Us</a></li>
 
 
 
 				<?php if (isset($_SESSION["userType"])) : ?>
 					<?php if ($_SESSION["userType"] === "admin") : ?>
+						<li><a href="profile.php">Profile</a></li>
 						<li><a href="admin-dashboard.php">Dashboard</a></li>
 					<?php elseif ($_SESSION["userType"] === "user") : ?>
-						<li><a href="#"><i class="user-icon">User Icon</i></a></li>
-						<li><a href="#"><span class="user-name">User Name</span></a></li>
+						<li><a href="profile.php">Profile</a></li>
 					<?php elseif ($_SESSION["userType"] === "superadmin") : ?>
 						<li><a href="super-admin-dashboard.php">Dashboard</a></li>
 					<?php endif; ?>
