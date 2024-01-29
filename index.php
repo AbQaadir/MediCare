@@ -85,5 +85,11 @@ require_once 'hero.php';
 require_once 'footer.php';
 ?>
 </body>
+<script>
+    function redirectToLogInPage() {
+        // Redirect to another page
+        window.location.href = "login.php";
+    }
+</script>
 
 </html>

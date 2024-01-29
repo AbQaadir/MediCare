@@ -27,16 +27,23 @@ function checkUploadErrors()
 }
 
 
-
-
 function generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice)
 {
     $html = "<div class='product-item'>";
     $html .= "<a href='$productLink'><img src='$imageSrc' alt='$productName'></a>";
     $html .= "<div class='product-name'>$productName</div>";
     $html .= "<div class='product-price'>LKR $productPrice</div>";
-    $html .= "<input type='hidden' name='id' value='$id'>";
-    $html .= "<button class='add-to-cart-btn' data-product-id='$id'>Add to Cart</button>"; // Add to Cart button
+
+    // Check if user is logged in and has necessary privileges
+    if (isset($_SESSION['userType']) && ($_SESSION['userType'] == 'admin' || $_SESSION['userType'] == 'superadmin' || $_SESSION['userType'] == 'user')) {
+        // Display the "Add to Cart" button for admin and super admin
+        $html .= "<input type='hidden' name='id' value='$id'>";
+        $html .= "<button class='add-to-cart-btn' data-product-id='$id'>Add to Cart</button>"; // Add to Cart button
+    } else {
+        // If user is not logged in or doesn't have necessary privileges, display login prompt
+        $html .= "<button class='add-to-cart-btn' onclick='redirectToLogInPage()'>Add to Cart</button>";
+    }
+
     $html .= "</div>";
 
     echo $html;
