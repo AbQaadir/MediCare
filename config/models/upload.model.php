@@ -1,12 +1,14 @@
 <?php
 
-function createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category) {
-    $query = "INSERT INTO products (fileName, fileDestination, productName, description, price, category) VALUES (?, ?, ?, ?, ?, ?);";
+function createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity)
+{
+    $query = "INSERT INTO products (fileName, fileDestination, productName, description, price, category, quantity) VALUES (?, ?, ?, ?, ?, ?, ?);";
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$fileNameNew, $fileDestination, $productName, $description, $price, $category]);
+    $stmt->execute([$fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity]);
 }
 
-function getProducts($pdo, $category) {
+function getProducts($pdo, $category)
+{
     $query = "SELECT * FROM products WHERE category = :category;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':category', $category);
