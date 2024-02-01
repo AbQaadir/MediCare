@@ -11,6 +11,7 @@ require_once 'config/config-session.php';
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="profile.css">
 	<link rel="stylesheet" href="product.css">
+	<link rel="stylesheet" href="cart-button.css">
 </head>
 
 <body>
@@ -33,21 +34,28 @@ require_once 'config/config-session.php';
 
 
 				<li><a href="index.php">Home</a></li>
-				<!-- <li><a href="#">Blog<i class="ti-angle-down"></i></a>
+				<li><a href="#">Blog<i class="ti-angle-down"></i></a>
 					<ul class="dropdown">
 						<li><a href="blog-single-sidebar.php">Blog Single Sidebar</a></li>
 					</ul>
-				</li> -->
+				</li>
 				<li><a href="contact-us.php">Contact Us</a></li>
+				<?php
+				if (isset($_SESSION["email"])) {
+					require_once 'cart-button.php';
+				}
+				?>
 
 
 
 				<?php if (isset($_SESSION["userType"])) : ?>
+					<li><a href="profile.php">Profile</a> </li>
 					<?php if ($_SESSION["userType"] === "admin") : ?>
 						<li><a href="profile.php">Profile</a></li>
 						<li><a href="admin-dashboard.php">Dashboard</a></li>
 					<?php elseif ($_SESSION["userType"] === "user") : ?>
 						<li><a href="profile.php">Profile</a></li>
+
 					<?php elseif ($_SESSION["userType"] === "superadmin") : ?>
 						<li><a href="super-admin-dashboard.php">Dashboard</a></li>
 					<?php endif; ?>
@@ -55,8 +63,6 @@ require_once 'config/config-session.php';
 				<?php else : ?>
 					<li><a href="login.php">Login</a></li>
 				<?php endif; ?>
-				<li><a href="cart-new.php">Cart</a></li>
-
 			</ul>
 		</nav>
 	</header>

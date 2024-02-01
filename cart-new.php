@@ -3,30 +3,53 @@ session_start();
 require_once('cart-component.php');
 require_once('getdata.php');
 
+$email = $_SESSION["email"];
+$con = mysqli_connect("localhost", "root", "", "medicare");
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+$result = mysqli_query($con, $sql5);
+$row1 = mysqli_fetch_assoc($result);
+$userId = $row1['user_id'];
+
+$con = mysqli_connect("localhost", "root", "", "medicare");
+
+$sql8 = "SELECT product_id FROM cart WHERE user_id ='$userId' ";
+
+$result8 = mysqli_query($con, $sql8);
+
+$result = getData();
+
+$idArray = array();
+
+while ($row8 = mysqli_fetch_assoc($result8)) {
+    $idArray[] = $row8['product_id'];
+}
+
 /// clear all
 if (isset($_POST['clear'])) {
-    if (isset($_SESSION['add_cart'])) {
-        $product_id = array_column($_SESSION['add_cart'], 'product_id');
+    if (!empty($idArray)) {
+
 
         $result = getData();
 
         while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($product_id as $id) {
+            foreach ($idArray as $id) {
                 if ($row['id'] == $id) {
                     $id = $row['id'];
                     echo $id;
                     $con = mysqli_connect("localhost", "root", "", "medicare");
-                    $sql1 = "UPDATE products SET qty = '1' WHERE id = '$id'";
+                    $sql1 = "UPDATE cart SET qty = '1' WHERE product_id = '$id'  AND user_id ='$userId'";
                     $result1 = mysqli_query($con, $sql1);
                 }
             }
         }
     }
 
+    $sql10 = "DELETE FROM cart WHERE user_id ='$userId' ";
+    $result10 = mysqli_query($con, $sql10);
+
     unset($_SESSION['add_cart']);
     header('Location: index.php');
     exit;
-
 }
 
 ///minus
@@ -37,12 +60,15 @@ if (isset($_POST['update_update_btn_mins'])) {
 
     // Ensure quantity doesn't go below 1
     if ($qty > 1) {
-        $sql4 = "UPDATE products SET qty = qty - 1 WHERE id = '$update_id'";
+        $sql4 = "UPDATE cart SET qty = qty - 1 WHERE product_id = '$update_id' AND user_id ='$userId'";
         $update_quantity_query = mysqli_query($con, $sql4);
+    } else {
+        $sql11 = "DELETE FROM cart WHERE product_id = '$update_id' AND user_id ='$userId' ";
+        $result11 = mysqli_query($con, $sql11);
     }
 
     // Redirect to shopping_cart.php
-    header('Location: shopping_cart.php');
+    header('Location: cart-new.php');
     exit;
 }
 
@@ -52,13 +78,39 @@ if (isset($_POST['update_update_btn'])) {
     $qty = $_POST['update_quantity'];
     $update_id = $_POST['update_quantity_id'];
 
-    $sql = "UPDATE products SET qty = qty + 1 WHERE id = '$update_id'";
 
-    $update_quantity_query = mysqli_query($con, $sql);
+    $sql32 = "SELECT qty_p FROM products WHERE id ='$update_id'";
+    $result32 = mysqli_query($con, $sql32);
+    $row32 = mysqli_fetch_assoc($result32);
 
-    echo "<script>
+    $in = $row32['qty_p'];
+
+
+
+    if ($row32['qty_p'] > $qty) {
+        $sql = "UPDATE cart SET qty = qty + 1 WHERE product_id = '$update_id' AND user_id ='$userId' ";
+
+        $update_quantity_query = mysqli_query($con, $sql);
+
+        echo "<script>
   window.onload ='shopping_cart.php';
 </script>";
+    } else if ($in == 0) {
+
+        $sql41 = "DELETE FROM cart WHERE product_id = '$update_id' AND user_id ='$userId' ";
+        $result41 = mysqli_query($con, $sql41);
+
+
+        echo "<script>alert('out of stock'); window.location.href = 'cart-new.php';</script>";
+    } else if ($in == $qty) {
+
+        echo "<script>alert('only $in products  in stock'); window.location.href = 'cart-new.php';</script>";
+    } else {
+        $sql = "UPDATE cart SET qty = '$in' WHERE product_id = '$update_id' AND user_id ='$userId' ";
+        $update_quantity_query = mysqli_query($con, $sql);
+
+        echo "<script>alert('you can by $in products for now '); window.location.href = 'cart-new.php';</script>";
+    }
 }
 
 
@@ -69,29 +121,10 @@ if (isset($_POST['update_update_btn'])) {
 else if (isset($_GET['action'])) {
     $id = $_GET['id'];
     $con = mysqli_connect("localhost", "root", "", "medicare");
-    $sql1 = "UPDATE products SET qty = '1' WHERE id = '$id'";
+    $sql1 = "UPDATE cart SET qty = '1' WHERE product_id = '$id' AND user_id ='$userId'";
     $result1 = mysqli_query($con, $sql1);
-    if ($_GET['action'] === 'removee') {
-
-        foreach ($_SESSION['add_cart'] as $key => $value) {
-
-            if ($value['product_id'] == $_GET['id']) {
-
-                unset($_SESSION['add_cart'][$key]);
-                if (!empty($_SESSION['add_cart'])) {
-                    echo "<script>alert('product has been removed..!')</script>";
-                    echo "<script>
-                    window.onload ='shopping_cart.php';
-                  </script>";
-
-                }
-            }
-        }
-
-    }
-    if (empty($_SESSION['add_cart'])) {
-        unset($_SESSION['add_cart']);
-    }
+    $sql11 = "DELETE FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
+    $result11 = mysqli_query($con, $sql11);
 }
 
 
@@ -266,33 +299,123 @@ else if (isset($_GET['action'])) {
             -moz-appearance: textfield;
             appearance: textfield;
         }
+
+        .b .text-success {
+            margin-right: 60px;
+        }
+
+        .checkout {
+            margin-top: 20px;
+            background-color: #f00;
+            color: #eee;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: Poppins;
+            width: 100%;
+            border-radius: 10px;
+            padding-right: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="cartTab">
-        <h1>SHopping Cart</h1>
+        <h1> </h1>
         <div class="listTotal">
             <div class="listCart">
+                <h1>Shopping Cart</h1>
+
                 <?php
                 $total = 0;
                 $counts = 0;
-                if (isset($_SESSION['add_cart'])) {
-                    $product_id = array_column($_SESSION['add_cart'], 'product_id');
+                $con = mysqli_connect("localhost", "root", "", "medicare");
 
-                    $result = getData();
+                $sql8 = "SELECT product_id FROM cart WHERE user_id ='$userId' ";
 
+                $result8 = mysqli_query($con, $sql8);
+
+                $result = getData();
+
+                $idArray = array();
+
+                while ($row8 = mysqli_fetch_assoc($result8)) {
+                    $idArray[] = $row8['product_id'];
+                }
+
+
+
+                if (!empty($idArray)) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        foreach ($product_id as $id) {
-                            if ($row['id'] == $id) {
-                                echo cartElements($row['image'], $row['name'], $row['price'], $row['id'], $row['qty']);
-                                $total = $total + (int) ($row['price'] * $row['qty']);
-                                $counts = $counts + (int) $row['qty'];
+
+                        foreach ($idArray as $id) {
+
+                            if (($row['id'] == $id)) {
+
+
+                                $con = mysqli_connect("localhost", "root", "", "medicare");
+
+                                $sql7 = "SELECT qty  FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
+
+                                $result7 = mysqli_query($con, $sql7);
+                                $row7 = mysqli_fetch_assoc($result7);
+
+
+
+                                echo cartElements($row['fileDestination'], $row['productName'], $row['price'], $row['id'], $row7['qty']);
+                                $total = $total + (int) ($row['price'] * $row7['qty']);
+                                $counts = $counts + (int) $row7['qty'];
                             }
                         }
                     }
                 } else {
-                    echo "<h4>Cart is Empty</h4>";
+                    $total = 0;
+                    $counts = 0;
+                    $con = mysqli_connect("localhost", "root", "", "medicare");
+
+                    $sql8 = "SELECT product_id FROM cart WHERE user_id ='$userId' ";
+
+                    $result8 = mysqli_query($con, $sql8);
+
+                    $result = getData();
+
+                    $idArray = array();
+
+                    while ($row8 = mysqli_fetch_assoc($result8)) {
+                        $idArray[] = $row8['product_id'];
+                    }
+
+
+
+                    if (!empty($idArray)) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+
+                            foreach ($idArray as $id) {
+
+                                if (($row['id'] == $id)) {
+
+
+                                    $con = mysqli_connect("localhost", "root", "", "medicare");
+
+                                    $sql7 = "SELECT qty  FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
+
+                                    $result7 = mysqli_query($con, $sql7);
+                                    $row7 = mysqli_fetch_assoc($result7);
+
+
+
+                                    echo cartElements($row['fileDestination'], $row['productName'], $row['price'], $row['id'], $row7['qty']);
+                                    $total = $total + (int) ($row['price'] * $row7['qty']);
+                                    $counts = $counts + (int) $row7['qty'];
+                                }
+                            }
+                        }
+                    } else {
+
+                        echo "<h4>Cart is Empty</h4>";
+                        $total = 0;
+                        $counts = 0;
+                    }
                 }
 
                 ?>
@@ -303,42 +426,43 @@ else if (isset($_GET['action'])) {
                 <div class="c">
                     <!-- // count total -->
                     <?php
-                    if (isset($_SESSION['add_cart'])) {
+                    if (isset($_SESSION['add_cart']) || !empty($idArray)) {
 
-                        echo "<h6>Price ($counts items)</h6>";
+                        echo "<p>Price ($counts items)</p>";
                     } else {
-                        echo "<h6>Price 0 items</h6>";
+                        echo "<p>Price 0 items</p>";
                     }
                     ?>
-                    <h6>
+                    <p>
                         <?php
-                        echo "<h6>Rs. $total /=</h6>"
-                            ?>
-                    </h6>
+                        echo "<p>Rs. $total /=</p>"
+                        ?>
+                    </p>
 
                 </div>
                 <div class="b">
-                    <h6>Delivery Charges</h6>
-                    <h6 class="text-success">FREE</h6>
+                    <p>Delivery Charges</p>
+                    <p class="text-success" style="color:#f00">FREE</p>
                 </div>
                 <hr>
                 <div class="a">
-                    <h6>Amount Payable</h6>
+                    <p>Amount Payable</p>
 
-                    <h6>
+                    <p>
 
                         <?php
-                        echo "<h6>Rs. $total /=</h6>"
-                            ?>
-                    </h6>
+                        echo "<p>Rs. $total /=</p>"
+                        ?>
+                    </p>
                 </div>
 
                 <hr>
 
                 <hr>
-                <form action="check-out.php" method="post">
+
+                <form action="payment-cash.php" method="post">
                     <div class="bt">
-                        <button name="checkout" type="submit" class="checkout">CHECK OUT</button>
+                        <button id="checkout" name="checkout" type="submit" class="checkout"> PROCEED TO CHECKOUT (<?php echo $counts ?>)</button>
                     </div>
                 </form>
             </div>
@@ -351,6 +475,17 @@ else if (isset($_GET['action'])) {
         </form>
     </div>
     <script src="cart.js"></script>
+    <?php
+    if ($counts == 0) {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var button = document.getElementById('checkout');
+                button.disabled = true;
+                button.style.backgroundColor = 'pink';
+            });
+        </script>";
+    }
+    ?>
 </body>
 
 </html>

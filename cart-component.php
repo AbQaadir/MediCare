@@ -7,7 +7,7 @@ function cartElements($productimg, $productname, $productprice, $productid, $qty
   $imageUrl = "../uploaded_img/$productimg";
 
   $element = "<hr><div class=\"item\" data-product-id=\"$productid\">
-     <form action=\"shopping_cart.php?action=removee&id_P=$productid\" method=\"post\" class=\"cart-items\" >
+     <form action=\"cart-new.php?action=removee&id=$productid\" method=\"post\" class=\"cart-items\" >
     <div class=\"item\" data-product-id=\"<?php echo $productid; ?>\">
               <div class=\"image\">
                   <img src=\"$imageUrl\" >
@@ -38,4 +38,3 @@ function cartElements($productimg, $productname, $productprice, $productid, $qty
        <hr>";
   return $element;
 }
-?>
