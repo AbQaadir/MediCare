@@ -16,3 +16,16 @@ function getUser($pdo, $email): array|false
         return false;
     }
 }
+
+
+function deleteUser($pdo, $email): bool
+{
+    try {
+        $sql = "DELETE FROM loginfo WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
