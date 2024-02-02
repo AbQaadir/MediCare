@@ -6,8 +6,6 @@ if (isset($_POST["submit"])) {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $category = $_POST["category"];
-    $quantity = $_POST["quantity"];
-
 
     try {
         require_once 'db.inc.php';
@@ -73,12 +71,8 @@ if (isset($_POST["submit"])) {
         $fileNameNew = $file["name"];
         $fileDestination = "../uploads/" . $fileNameNew;
 
-        echo $fileDestination;
-        echo $category;
-        echo $quantity;
-
         // If no errors, create user in the database
-        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity);
+        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category);
 
         header("Location: ../index.php?upload=success");
         $pdo = null; // Close the database connection

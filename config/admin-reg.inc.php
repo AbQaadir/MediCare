@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require_once 'models/admin.reg.model.php';
         require_once 'controllers/admin.reg.contr.php';
 
-        
+
         $errors = array();
 
         // check that input fields are empty and valid
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (!isValidPassword($password, $password_confirmation)) {
             $errors["invalid_password"] = 'Passwords do not match';
         }
-        
+
         if (isEmailInUseLoginfo($pdo, $email)) {
             $errors["used_email_loginfo"] = 'Email is already in use';
         }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isEmilInUseAdmin($pdo, $email)) {
             $errors["used_email_admin"] = 'Email is already in use';
         }
-        
+
 
         require_once 'config-session.php';
 
@@ -63,17 +63,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "phone" => $phone_number
             ];
             $_SESSION["registerData"] = $registerData;
-            header("Location: ../admin.reg.php");
+            header("Location: ../admin-reg.php");
             die();
         }
-        
+
         setAdmin($pdo, $email, $password, $name, $phone_number);
-        header("Location: ../admin.list.php");
+        header("Location: ../admins.php");
         $pdo = null;
         $stmt = null;
         die();
     } catch (PDOException $e) {
-        die("Query failed: ".$e->getMessage());
+        die("Query failed: " . $e->getMessage());
     }
 } else {
     header('Location: ../index.php');
