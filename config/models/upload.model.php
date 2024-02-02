@@ -2,7 +2,7 @@
 
 function createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity)
 {
-    $query = "INSERT INTO products (fileName, fileDestination, productName, description, price, category, quantity) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    $query = "INSERT INTO products (fileName, fileDestination, productName, description, price, category, qty_p) VALUES (?, ?, ?, ?, ?, ?, ?);";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity]);
 }
