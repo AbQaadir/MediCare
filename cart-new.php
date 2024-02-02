@@ -5,7 +5,13 @@ require_once('getdata.php');
 
 $email = $_SESSION["email"];
 $con = mysqli_connect("localhost", "root", "", "medicare");
-$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+UNION
+SELECT user_id FROM superadmin WHERE email ='$email'  
+UNION
+SELECT user_id FROM admin WHERE email ='$email'
+
+";
 $result = mysqli_query($con, $sql5);
 $row1 = mysqli_fetch_assoc($result);
 $userId = $row1['user_id'];
@@ -92,9 +98,10 @@ if (isset($_POST['update_update_btn'])) {
 
         $update_quantity_query = mysqli_query($con, $sql);
 
-        echo "<script>
-  window.onload ='shopping_cart.php';
-</script>";
+        header('Location: cart-new.php');
+        exit;
+
+
     } else if ($in == 0) {
 
         $sql41 = "DELETE FROM cart WHERE product_id = '$update_id' AND user_id ='$userId' ";
@@ -105,12 +112,14 @@ if (isset($_POST['update_update_btn'])) {
     } else if ($in == $qty) {
 
         echo "<script>alert('only $in products  in stock'); window.location.href = 'cart-new.php';</script>";
-    } else {
+    } else if($row32['qty_p'] < $qty) {
         $sql = "UPDATE cart SET qty = '$in' WHERE product_id = '$update_id' AND user_id ='$userId' ";
         $update_quantity_query = mysqli_query($con, $sql);
 
         echo "<script>alert('you can by $in products for now '); window.location.href = 'cart-new.php';</script>";
     }
+
+   
 }
 
 

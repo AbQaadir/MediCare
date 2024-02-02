@@ -1,9 +1,71 @@
 <?php
 session_start();
+
 require_once("getdata.php");
 require_once("check_out_componets.php");
 
+
+
+$email = $_SESSION["email"];
+$con = mysqli_connect("localhost", "root", "", "medicare");
+
+// Check connection
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+// Fetch user details
+$sql5 = "SELECT * FROM loginfo WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row1 = mysqli_fetch_assoc($result);
+
+$userId = $row1['user_id'];
+$name = $row1['name'];
+$tel = $row1['phone_number'];
+
+// Insert user details into user_details table if not already present
+$sql20 = "INSERT INTO user_details (name, email, telephone, address, user_id)
+          VALUES ('$name', '$email', '$tel', '123 Main St, City, Country', '$userId')";
+mysqli_query($con, $sql20);
+
+// Fetch user details from user_details table
+$sql5 = "SELECT * FROM user_details WHERE user_id ='$userId'";
+$result = mysqli_query($con, $sql5);
+$row21 = mysqli_fetch_assoc($result);
+
+$email1 = $row21['email'];
+$name1 = $row21['name'];
+$tel1 = $row21['telephone'];
+$address1 = $row21['address'];
+
+
+
+// Handle form submission for updating user details
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    // Get data from form
+    $new_tel = "+94".$_POST['telephone'];
+    $new_name = $_POST['name']; 
+    $new_email = $_POST['email']; 
+    $new_address = $_POST['address'];
+
+    // Update query
+    $sql22 = "UPDATE user_details
+              SET name = '$new_name', email = '$new_email', telephone = '$new_tel', address = '$new_address'
+              WHERE user_id = '$userId'";
+
+    // Execute the query
+    if (mysqli_query($con, $sql22)) {
+        echo "<script>alert('your details updated successfully'); window.location.href = 'check-out.php';</script>";
+    } else {
+        echo "Error updating record: " . mysqli_error($con);
+    }
+}
+
+mysqli_close($con);
 ?>
+
 
 
 <!DOCTYPE html>
@@ -11,67 +73,6 @@ require_once("check_out_componets.php");
 
 <head>
     <title>Payment Form</title>
-    <!-- <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            width: 300px;
-            padding: 16px;
-            background-color: white;
-            margin: 0 auto;
-            margin-top: 100px;
-            border: 1px solid black;
-            border-radius: 4px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            background-color: #4caf50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        .container input[type="radio"] {
-            margin-top: 8px;
-        }
-
-        .container input[type="tel"] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .red {
-            background-color: red;
-        }
-    </style> -->
-
     <style>
         .cartTab .listCart .item img {
             width: 80%;
@@ -171,6 +172,72 @@ require_once("check_out_componets.php");
             display: flex;
             justify-content: space-between;
         }
+
+        .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        background-color: #fff;
+        padding: 20px;
+        z-index: 9999;
+        
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+    }
+
+    .edit_btn{
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 100px;
+    }
+
+    .popup input {
+        width: 100%; /* Set input width to 100% */
+    }
+    .error {
+        color: red;
+    }
+    .b .text-success{
+        margin-right: 50px;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+    
     </style>
 </head>
 
@@ -178,41 +245,108 @@ require_once("check_out_componets.php");
     <div class="container">
         <div class="all">
             <div class="big">
-                <h2><u>user Details</u></h2>
-                <form action="submit_payment.php" method="post">
-                    <label for="name">Name:</label><br />
-                    <input type="text" id="name" name="name" required /><br />
-
-                    <label for="email">Email:</label><br />
-                    <input type="email" id="email" name="email" required /><br />
-
-                    <label for="telephone">Telephone Number:</label><br />
-                    <input type="tel" id="telephone" name="telephone" required /><br />
-
-                    <label for="address">Home Address:</label><br />
-                    <input type="text" id="address" name="address" required /><br />
-
-                    <h3>Payment Method:</h3>
+                
+                    <label for="name">Deliver to : <?php echo $name1; ?></label><br/>
+                    <label for="email">Email to : <?php echo  $email1; ?></label><br />
+                    <label for="telephone">Telephone Number :<?php echo $tel1; ?> </label><br />
+                    <label for="address">Home Address:<?php echo $address1 ?></label><br />
 
 
-                </form>
-                <div class="cartTab">
-                    <div class="listCart">
 
-                        <?php
+
+                    <button class="edit_btn" onclick="openPopup()">change</button>
+
+<!-- Popup container -->
+<div class="popup" id="popup">
+    <h2>Edit Details</h2>
+    <form action="check-out.php" method="post" id="editForm">
+        <label for="name">Name: </label><br>
+        <input type="text" id="name" name="name" value="<?php echo $name1; ?>" required>
+        <br>
+        <div id="nameError" class="error"></div><br>
+
+        <label for="email">Email: </label><br>
+        <input type="email" id="email" name="email" value="<?php echo $email1; ?>" required><br>
+        <div id="emailError" class="error"></div><br>
+
+
+        <label for="telephone">Telephone Number: </label><br>
+        <input style="width: 9%;" type="text" value="+94" readonly>
+        <input style="width: 86%;" type="number" id="telephone" name="telephone"   value="<?php $firstThreeDigits = substr($tel1, 3); echo $firstThreeDigits; ?>" required><br>
+
+        <div id="phoneError" class="error"></div><br>
+
+        <label for="address">Home Address: </label><br>
+        <input type="text" id="address" name="address" value="<?php echo $address1 ?>" required><br><br>
+
+        
+
+       <form action="check-out.php" method="post">
+       <button name="change" type="submit">Save Changes</button>
+       </form>
+        
+    </form>
+    <button type="button" onclick="closePopup()">Cancel</button>
+</div>
+
+<!-- Overlay to darken background when popup is open -->
+<div class="overlay" id="overlay"></div>
+
+
+
+
+                    
+
+               
+
+<div class="cartTab">
+<div class="listCart">
+
+<?php
+
+
+$email = $_SESSION["email"];
+$con = mysqli_connect("localhost", "root", "", "medicare");
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+$result = mysqli_query($con, $sql5);
+$row1=mysqli_fetch_assoc($result);
+$userId = $row1['user_id'];
+
+
+$con = mysqli_connect("localhost","root","","medicare");
+
+$sql8 = "SELECT product_id FROM cart WHERE user_id ='$userId' ";
+
+$result8 = mysqli_query($con,$sql8);
+
+$idArray = array();
+
+while ($row8 = mysqli_fetch_assoc($result8)) {
+$idArray[] = $row8['product_id'];}
+
                         $total = 0;
                         $counts = 0;
-                        if (isset($_SESSION['add_cart'])) {
-                            $product_id = array_column($_SESSION['add_cart'], 'product_id');
+                        if (!empty($idArray)) {
+                            
 
                             $result = getData();
 
                             while ($row = mysqli_fetch_assoc($result)) {
-                                foreach ($product_id as $id) {
-                                    if ($row['id_P'] == $id) {
-                                        echo cartElements_checkOut($row['image'], $row['name'], $row['price'], $row['id_P'], $row['qty']);
-                                        $total = $total + (int) ($row['price'] * $row['qty']);
-                                        $counts = $counts + (int) $row['qty'];
+                                foreach ($idArray as $id) {
+                                    if ($row['id'] == $id) {
+
+                                        $con = mysqli_connect("localhost","root","","medicare");
+
+                                        $sql7 = "SELECT qty  FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
+
+                                        $result7 = mysqli_query($con,$sql7);
+                                        $row7 = mysqli_fetch_assoc($result7);
+
+
+
+                                        echo cartElements_checkOut($row['fileDestination'], $row['productName'], $row['price'], $row['id'], $row7['qty']);
+                                        $total = $total + (int) ($row['price'] * $row7['qty']);
+                                        $counts = $counts + (int) $row7['qty'];
 
                                     }
                                 }
@@ -231,54 +365,112 @@ require_once("check_out_componets.php");
                 <div class="c">
                     <!-- // count total -->
                     <?php
-                    if (isset($_SESSION['add_cart'])) {
+                    if (!empty($idArray)) {
                         // $count = count($_SESSION['cart']);
-                        echo "<h6>Price ($counts items)</h6>";
+                        echo "<p>Price ($counts items)</p>";
                     } else {
-                        echo "<h6>Price 0 items</h6>";
+                        echo "<p>Price 0 items</p>";
                     }
                     ?>
-                    <h6>
+                    <p>
                         <?php
-                        echo "<h6>LKR $total/=</h6>"
+                        echo "<p>LKR $total/=</p>"
                             ?>
-                    </h6>
+                    </p>
 
                 </div>
                 <div class="b">
-                    <h6>Delivery Charges</h6>
-                    <h6 class="text-success">FREE</h6>
+                    <p>Delivery Charges</p>
+                    <p class="text-success" style="color:#f00">FREE      </p>
                 </div>
                 <hr>
                 <div class="a">
-                    <h6>Amount Payable</h6>
+                    <p>Amount Payable</p>
 
-                    <h6>
+                    <p>
 
                         <?php
-                        echo "<h6>LKR $total/=</h6>"
+                        echo "<p>LKR $total/=</p>"
                             ?>
-                    </h6>
+                    </p>
                 </div>
 
                 <hr>
                 <h4>payment method</h4>
+
                 <form action="paymen-t.php" method="post">
-                    <button class="cash" name="cash">Cash on Delivery</button>
-                    <button class="online" name="online">pay now</button>
+                <button class="online" name="online">pay now online</button>
+                </form>
+
+                <form action="cash-pay.php" method="post" >
+                <button class="cash" name="cash">Cash on Delivery</button>
                 </form>
 
             </div>
 
-
-
-
-
-
-
-
         </div>
     </div>
+    <script>
+        // Function to open popup
+        function openPopup() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        // Function to close popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Function to validate email
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Function to validate phone number
+        function validatePhone(phone) {
+            const regex = /^\d{9}$/;
+            return regex.test(phone);
+        }
+
+        // Validate form before submission
+        document.getElementById('editForm').addEventListener('submit', function (event) {
+            event.preventDefault();// Prevent form submission
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('telephone').value;
+
+            // Clear previous error messages
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('phoneError').textContent = '';
+
+            // Validate name
+            if (!name.trim()) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                return;
+            }
+
+            // Validate email
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').textContent = 'Invalid email address';
+                return;
+            }
+
+            // Validate phone number
+            if (!validatePhone(phone)) {
+                document.getElementById('phoneError').textContent = 'Invalid phone number ';
+                return;
+            }
+
+            // If all validations pass, submit the form
+            this.submit();
+            
+           
+        });
+    </script>
 </body>
 
 </html>

@@ -6,6 +6,8 @@ if (isset($_POST["submit"])) {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $category = $_POST["category"];
+    $quantity = $_POST["qty_p"];
+
 
     try {
         require_once 'db.inc.php';
@@ -63,7 +65,7 @@ if (isset($_POST["submit"])) {
         if ($errors) {
             $_SESSION["errors_upload"] = $errors;
 
-            header("Location: ../upload.php");
+            header("Location: ../add-new-products.php");
             die();
         }
 
@@ -71,11 +73,15 @@ if (isset($_POST["submit"])) {
         $fileNameNew = $file["name"];
         $fileDestination = "../uploads/" . $fileNameNew;
 
+        echo $fileDestination;
+        echo $category;
+        echo $quantity;
+
         // If no errors, create user in the database
-        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category);
+        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity);
 
         header("Location: ../index.php?upload=success");
-        $pdo = null; // Close the database connection
+        $pdo = null;
         $stmt = null;
         die();
     } catch (PDOException $e) {
