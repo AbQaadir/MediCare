@@ -81,7 +81,7 @@ if (isset($_POST["submit"])) {
         createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity);
 
         header("Location: ../index.php?upload=success");
-        $pdo = null; // Close the database connection
+        $pdo = null;
         $stmt = null;
         die();
     } catch (PDOException $e) {
