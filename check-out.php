@@ -16,13 +16,33 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch user details
-$sql5 = "SELECT * FROM loginfo WHERE email ='$email'";
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+UNION
+SELECT user_id FROM superadmin WHERE email ='$email'  
+UNION
+SELECT user_id FROM admin WHERE email ='$email'";
 $result = mysqli_query($con, $sql5);
 $row1 = mysqli_fetch_assoc($result);
 
+$sql5 = "SELECT name FROM loginfo WHERE email ='$email'
+UNION
+SELECT name FROM superadmin WHERE email ='$email'  
+UNION
+SELECT name FROM admin WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row2 = mysqli_fetch_assoc($result);
+
+$sql5 = "SELECT phone_number FROM loginfo WHERE email ='$email'
+UNION
+SELECT phone_number FROM superadmin WHERE email ='$email'  
+UNION
+SELECT phone_number FROM admin WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row3 = mysqli_fetch_assoc($result);
+
 $userId = $row1['user_id'];
-$name = $row1['name'];
-$tel = $row1['phone_number'];
+$name = $row2['name'];
+$tel = $row3['phone_number'];
 
 // Insert user details into user_details table if not already present
 $sql20 = "INSERT INTO user_details (name, email, telephone, address, user_id)
@@ -307,7 +327,11 @@ mysqli_close($con);
 
 $email = $_SESSION["email"];
 $con = mysqli_connect("localhost", "root", "", "medicare");
-$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+UNION
+SELECT user_id FROM superadmin WHERE email ='$email'  
+UNION
+SELECT user_id FROM admin WHERE email ='$email'";
 $result = mysqli_query($con, $sql5);
 $row1=mysqli_fetch_assoc($result);
 $userId = $row1['user_id'];

@@ -60,7 +60,11 @@ if (isset($_POST['add'])) {
         $email = $_SESSION["email"];
         $product_id = $_POST['product_id'];
         $con = mysqli_connect("localhost", "root", "", "medicare");
-        $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+        $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+        UNION
+        SELECT user_id FROM superadmin WHERE email ='$email'  
+        UNION
+        SELECT user_id FROM admin WHERE email ='$email'";
         $result = mysqli_query($con, $sql5);
         $row1 = mysqli_fetch_assoc($result);
         $userId = $row1['user_id'];
@@ -82,7 +86,11 @@ if (isset($_POST['add'])) {
         $email = $_SESSION["email"];
         $product_id = $_POST['product_id'];
         $con = mysqli_connect("localhost", "root", "", "medicare");
-        $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+        $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+        UNION
+        SELECT user_id FROM superadmin WHERE email ='$email'  
+        UNION
+        SELECT user_id FROM admin WHERE email ='$email'";
         $result = mysqli_query($con, $sql5);
         $row1 = mysqli_fetch_assoc($result);
         $userId = $row1['user_id'];
