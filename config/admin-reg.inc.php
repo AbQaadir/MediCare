@@ -63,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "phone" => $phone_number
             ];
             $_SESSION["registerData"] = $registerData;
-            header("Location: ../admin.reg.php");
+            header("Location: ../admin-reg.php");
             die();
         }
         
         setAdmin($pdo, $email, $password, $name, $phone_number);
-        header("Location: ../admin.list.php");
+        header("Location: ../admins.php");
         $pdo = null;
         $stmt = null;
         die();
