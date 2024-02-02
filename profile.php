@@ -6,15 +6,22 @@ try {
     require_once 'config/views/profile.view.php';
 
     $email = $_SESSION["email"];
-    $result = getUser($pdo, $email);
+    $userType = $_SESSION["userType"];
 
-    if ($result) {
+
+
+    if ($email && $userType == "loginfo") {
+        $result = getUser($pdo, $email);
+        $name = $result["name"];
+        $phone = $result["phone_number"];
+        $email = $result["email"];
+    } elseif ($email && $userType == "admin") {
+        $result = getAdmin($pdo, $email);
         $name = $result["name"];
         $phone = $result["phone_number"];
         $email = $result["email"];
     } else {
-        $name = "Abdul Qaadir";
-        $phone = "1234567890";
+        header("Location: login.php");
     }
 } catch (PDOException $e) {
     die("Could not connect. " . $e->getMessage());
