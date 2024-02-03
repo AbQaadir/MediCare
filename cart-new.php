@@ -547,7 +547,42 @@ else if (isset($_GET['action'])) {
                         <button id="checkout" name="checkout" type="submit" class="checkout"> PROCEED TO CHECKOUT (<?php echo $counts ?>)</button>
                     </div>
                 </form>
+                <br><hr><hr><hr>
+
+                <?php if (isset($_SESSION["userType"])){
+                        if ($_SESSION["userType"] === "admin"){echo '
+                            <form action="test-q-for-admin.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">orders</button>                   
+                                </div>
+                            </form>
+                            ';}
+                        else if($_SESSION["userType"] === "superadmin"){echo '
+                            <form action="test-q-for-admin.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">orders</button>                   
+                                </div>
+                            </form>
+                            ';}
+                        else {
+                           
+                            echo '
+                            <form action="test-queary.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">my orders</button>                   
+                                </div>
+                            </form>
+                            ';
+                           
+                        }
+                        
+                    }
+                    ?>
+
+           
+
             </div>
+           
         </div>
         <form method="post">
             <div class="btn">

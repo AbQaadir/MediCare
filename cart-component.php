@@ -4,13 +4,13 @@ require_once("cart-new.php");
 function cartElements($productimg, $productname, $productprice, $productid, $qty)
 {
 
-  $imageUrl = "../uploaded_img/$productimg";
+  $filename = "uploads/".basename($productimg);
 
   $element = "<hr><div class=\"item\" data-product-id=\"$productid\">
      <form action=\"cart-new.php?action=removee&id=$productid\" method=\"post\" class=\"cart-items\" >
     <div class=\"item\" data-product-id=\"<?php echo $productid; ?>\">
               <div class=\"image\">
-                  <img src=\"$imageUrl\" >
+                  <img src=\"$filename\" >
               </div>
               <div class=\"productName\">
               $productname
