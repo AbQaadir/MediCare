@@ -86,9 +86,43 @@
                 echo "<div>$counts</div>";
             } else {
 
-                echo "<div>0</div>";
+
+                echo "<style> svg {
+                    width: 30px;
+                    height: 30px;
+                  }
+                  
+                  
+                  header .icon-cart {
+                    position: relative;
+                    z-index: 1;
+                  
+                  }
+                  
+                  header .icon-cart div {
+                    
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background-color:  #0866ff;
+                    color: #fff;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 12px;
+                    z-index: 2;
+                  
+                  }</style>";
+    
+                // header("Location: login.php");
+                
+
             }
 
+           
 
 
 
@@ -96,4 +130,5 @@
             ?>
         </div>
     </a>
+            
 </li>

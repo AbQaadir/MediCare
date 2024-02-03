@@ -22,7 +22,7 @@ function cartElements($productimg, $productname, $productprice, $productid, $qty
                 <div class=\"quantity\">
                 <form action=\"shopping_cart.php\" method=\"post\" class=\"cart-items\">
                         <input type=\"hidden\" name=\"update_quantity_id\" value=$productid>
-                        <button type=\"submit\" class=\"updateBtn\" name=\"update_update_btn_mins\">-</button>
+                        <button type=\"submit\" id=\"\minusbtn\" class=\"updateBtn\" name=\"update_update_btn_mins\">-</button>
                         <input type=\"number\" name=\"update_quantity\" min=\"1\" value=$qty class=\"in\">
                         <button type=\"submit\" class=\"updateBtnn\" name=\"update_update_btn\">+</button>
                     </form>
