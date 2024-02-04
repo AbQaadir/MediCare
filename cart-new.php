@@ -3,6 +3,10 @@ session_start();
 require_once('cart-component.php');
 require_once('getdata.php');
 
+
+
+if (isset($_SESSION["email"])) {
+
 $email = $_SESSION["email"];
 $con = mysqli_connect("localhost", "root", "", "medicare");
 $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
@@ -136,7 +140,10 @@ else if (isset($_GET['action'])) {
     $result11 = mysqli_query($con, $sql11);
 }
 
-
+}else{
+    $_SESSION['direct-to-cart']="yes";
+    header('Location: login.php');
+    exit;}
 
 ?>
 
@@ -325,6 +332,54 @@ else if (isset($_GET['action'])) {
             border-radius: 10px;
             padding-right: 10px;
         }
+        .cart-to-index-page-button {
+    display: block;
+    margin: 0 auto; /* Center the button horizontally */
+    padding: 10px 20px;
+    background-color: #0866ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.cart-to-index-page-button:hover {
+    background-color: #0454c2; /* Change background color on hover */
+}
+
+.updateBtn {
+    border: none;
+    border-radius: 50%; /* Make it round */
+    width: 40px; /* Set width and height for a round button */
+    height: 40px;
+    background-color: #0866ff; /* Change to your desired color */
+    color: white;
+    font-size: 20px; /* Adjust font size as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.updateBtn:hover {
+    background-color: #0454c2; /* Change background color on hover */
+}
+
+.updateBtnn {
+    border: none;
+    border-radius: 50%; /* Make it round */
+    width: 40px; /* Set width and height for a round button */
+    height: 40px;
+    background-color: #0866ff; /* Change to your desired color */
+    color: white;
+    font-size: 20px; /* Adjust font size as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.updateBtnn:hover {
+    background-color: #0454c2; /* Change background color on hover */
+}
+
     </style>
 </head>
 
@@ -416,12 +471,30 @@ else if (isset($_GET['action'])) {
                                     echo cartElements($row['fileDestination'], $row['productName'], $row['price'], $row['id'], $row7['qty']);
                                     $total = $total + (int) ($row['price'] * $row7['qty']);
                                     $counts = $counts + (int) $row7['qty'];
+
+
+
+                                    if($row7['qty'] == 1){
+                                        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var buttonn = document.getElementById('minusbtn');
+                buttonn.disabled = true;
+                buttonn.style.backgroundColor = 'pink';
+            });
+        </script>";
+                                    }
+                                    
+
+
                                 }
                             }
                         }
                     } else {
 
-                        echo "<h4>Cart is Empty</h4>";
+                        echo "<h4>There are no items in this cart</h4>";
+                        echo "<form action='index.php' method='post'>";                      
+                        echo "<button  class='cart-to-index-page-button' >COUNTINUE SHOPPING</button>";
+                        echo "</form>";
                         $total = 0;
                         $counts = 0;
                     }
@@ -474,7 +547,42 @@ else if (isset($_GET['action'])) {
                         <button id="checkout" name="checkout" type="submit" class="checkout"> PROCEED TO CHECKOUT (<?php echo $counts ?>)</button>
                     </div>
                 </form>
+                <br><hr><hr><hr>
+
+                <?php if (isset($_SESSION["userType"])){
+                        if ($_SESSION["userType"] === "admin"){echo '
+                            <form action="test-q-for-admin.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">orders</button>                   
+                                </div>
+                            </form>
+                            ';}
+                        else if($_SESSION["userType"] === "superadmin"){echo '
+                            <form action="test-q-for-admin.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">orders</button>                   
+                                </div>
+                            </form>
+                            ';}
+                        else {
+                           
+                            echo '
+                            <form action="test-queary.php" method="post">
+                                <div class="btn">
+                                    <button type="submit">my orders</button>                   
+                                </div>
+                            </form>
+                            ';
+                           
+                        }
+                        
+                    }
+                    ?>
+
+           
+
             </div>
+           
         </div>
         <form method="post">
             <div class="btn">
@@ -494,6 +602,8 @@ else if (isset($_GET['action'])) {
             });
         </script>";
     }
+
+    
     ?>
 </body>
 

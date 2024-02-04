@@ -43,7 +43,10 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         $html .= "</form>";
     } else {
         // If user is not logged in or doesn't have necessary privileges, display login prompt
-        $html .= "<button class='add-to-cart-btn' onclick='redirectToLogInPage()'>Add to Cart</button>";
+        $html .= "<form action='login.php' method='post'>";
+        $html .= "<input type='hidden' name='product_id' value='$id'>";
+        $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>Add to Cart</button>";
+        $html .= "</form>";
     }
 
 

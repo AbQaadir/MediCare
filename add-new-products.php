@@ -45,7 +45,7 @@ require_once 'config/views/upload.view.php';
 
             <div class="mb-3 col-md-5 mx-auto">
                 <label for="quantity" class="form-label col-md-6 mx-auto">Quantity :</label>
-                <input type="number" class="form-control col-md-6 mx-auto" id="quantity" name="quantity" required>
+                <input type="number" class="form-control col-md-6 mx-auto" id="quantity" name="qty_p" required>
             </div>
 
 
