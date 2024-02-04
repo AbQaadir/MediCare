@@ -32,7 +32,7 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
     $html = "<div class='product-item'>";
     $html .= "<a href='$productLink'><img src='$imageSrc' alt='$productName'></a>";
     $html .= "<div class='product-name'>$productName</div>";
-    $html .= "<div class='product-price'>LKR $productPrice</div>";
+    $html .= "<div class='product-price'>$productPrice</div>";
 
 
 

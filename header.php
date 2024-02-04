@@ -21,9 +21,13 @@ require_once 'config/config-session.php';
 				<li>
 					<h1>MediCare</h1>
 				</li>
-				<li>
-					<input type="text" placeholder="Search..." style="padding: 8px 16px; margin-left: 10px; width: 200px;">
-				</li>
+
+				<form action="config/search.inc.php" method="POST">
+					<li>
+						<input type="text" name="keyword" placeholder="Eye" style="padding: 5px 5px; margin-left: 10px; width: 200px;">
+						<button type="submit" style="padding: 5px 5px; background-color: white; color: black;">Search</button>
+					</li>
+				</form>
 
 				<li><span></span></li>
 				<li><span></span></li>
