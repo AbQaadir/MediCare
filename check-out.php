@@ -16,17 +16,46 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch user details
-$sql5 = "SELECT * FROM loginfo WHERE email ='$email'";
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+UNION
+SELECT user_id FROM superadmin WHERE email ='$email'  
+UNION
+SELECT user_id FROM admin WHERE email ='$email'";
 $result = mysqli_query($con, $sql5);
 $row1 = mysqli_fetch_assoc($result);
 
+$sql5 = "SELECT name FROM loginfo WHERE email ='$email'
+UNION
+SELECT name FROM superadmin WHERE email ='$email'  
+UNION
+SELECT name FROM admin WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row2 = mysqli_fetch_assoc($result);
+
+$sql5 = "SELECT phone_number FROM loginfo WHERE email ='$email'
+UNION
+SELECT phone_number FROM superadmin WHERE email ='$email'  
+UNION
+SELECT phone_number FROM admin WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row3 = mysqli_fetch_assoc($result);
+
+$sql5 = "SELECT address FROM loginfo WHERE email ='$email'
+UNION
+SELECT address FROM superadmin WHERE email ='$email'  
+UNION
+SELECT address FROM admin WHERE email ='$email'";
+$result = mysqli_query($con, $sql5);
+$row4 = mysqli_fetch_assoc($result);
+
 $userId = $row1['user_id'];
-$name = $row1['name'];
-$tel = $row1['phone_number'];
+$name = $row2['name'];
+$tel = $row3['phone_number'];
+$address = $row4['address'];
 
 // Insert user details into user_details table if not already present
 $sql20 = "INSERT INTO user_details (name, email, telephone, address, user_id)
-          VALUES ('$name', '$email', '$tel', '123 Main St, City, Country', '$userId')";
+          VALUES ('$name', '$email', '$tel', '$address', '$userId')";
 mysqli_query($con, $sql20);
 
 // Fetch user details from user_details table
@@ -237,6 +266,9 @@ mysqli_close($con);
             appearance: textfield;
         }
 
+        h5{
+            width: 60%;
+        }
     
     </style>
 </head>
@@ -249,10 +281,7 @@ mysqli_close($con);
                     <label for="name">Deliver to : <?php echo $name1; ?></label><br/>
                     <label for="email">Email to : <?php echo  $email1; ?></label><br />
                     <label for="telephone">Telephone Number :<?php echo $tel1; ?> </label><br />
-                    <label for="address">Home Address:<?php echo $address1 ?></label><br />
-
-
-
+                    <label for="address">Home Address:<?php echo "<label style='color: red;'>".$address1."</label>"; ?></label><br />
 
                     <button class="edit_btn" onclick="openPopup()">change</button>
 
@@ -307,7 +336,11 @@ mysqli_close($con);
 
 $email = $_SESSION["email"];
 $con = mysqli_connect("localhost", "root", "", "medicare");
-$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email' ";
+$sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+UNION
+SELECT user_id FROM superadmin WHERE email ='$email'  
+UNION
+SELECT user_id FROM admin WHERE email ='$email'";
 $result = mysqli_query($con, $sql5);
 $row1=mysqli_fetch_assoc($result);
 $userId = $row1['user_id'];

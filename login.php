@@ -1,6 +1,17 @@
 <?php
+
     require_once 'config/config-session.php';
     require_once 'config/views/login.view.php';
+
+if (isset($_POST['add'])) {
+    $_SESSION["p_id"] =$_POST['product_id'];}
+
+    if(isset($_SESSION["p_id"])){ 
+        $id_P = $_SESSION["p_id"];
+
+       }
+   
+   
 ?>
 
 <!DOCTYPE html>

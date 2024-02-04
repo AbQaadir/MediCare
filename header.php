@@ -41,9 +41,9 @@ require_once 'config/config-session.php';
 				</li>
 				<li><a href="contact-us.php">Contact Us</a></li>
 				<?php
-				if (isset($_SESSION["email"])) {
+				
 					require_once 'cart-button.php';
-				}
+				
 				?>
 
 
