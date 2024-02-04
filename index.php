@@ -26,8 +26,8 @@ require_once 'hero.php';
 
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane active" id="man" role="tabpanel">
-        <h1>
-            <ul>Promotions</ul>
+        <h1 style="text-align: center;">
+            Promotions
         </h1>
         <div class="tab-single">
             <div class="row">
@@ -37,8 +37,8 @@ require_once 'hero.php';
     </div>
 
     <div class="tab-pane" id="women" role="tabpanel">
-        <h1>
-            <ul>Eye</ul>
+        <h1 style="text-align: center;">
+            Eye
         </h1>
         <div class="tab-single">
             <div class="row">
@@ -48,8 +48,8 @@ require_once 'hero.php';
     </div>
 
     <div class="tab-pane" id="kids" role="tabpanel">
-        <h1>
-            <ul>Heart</ul>
+        <h1 style="text-align: center;">
+            Heart
         </h1>
         <div class="tab-single">
             <div class="row">
@@ -59,8 +59,8 @@ require_once 'hero.php';
     </div>
 
     <div class="tab-pane" id="accessories" role="tabpanel">
-        <h1>
-            <ul>Diabetes</ul>
+        <h1 style="text-align: center;">
+            Diabetes
         </h1>
         <div class="tab-single">
             <div class="row">
@@ -70,8 +70,8 @@ require_once 'hero.php';
     </div>
 
     <div class="tab-pane" id="essential" role="tabpanel">
-        <h1>
-            <ul>Personal Care</ul>
+        <h1 style="text-align: center;">
+            Personal Care
         </h1>
         <div class="tab-single">
             <div class="row">
