@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors["sql_injection"] = 'SQL Injection detected';
         }
 
+        require_once 'config-session.php';
+
         if ($errors) {
             $_SESSION['errorsSearch'] = $errors;
             header('Location: ../index.php');
@@ -33,10 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($products) {
             $_SESSION['products'] = $products;
-            echo '<pre>';
-            print_r($products);
-            echo '</pre>';
-            // header('Location: ../search.php');
+            header('Location: ../search.php');
             exit();
         } else {
             $_SESSION['noProducts'] = 'No products found';
