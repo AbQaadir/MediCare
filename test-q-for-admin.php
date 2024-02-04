@@ -5,6 +5,13 @@
     <style>
         .order-details {
             margin-bottom: 20px;
+           
+        }
+
+        .order{
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column-reverse;
         }
         .order-table {
             width: 100%;
@@ -22,6 +29,7 @@
             max-width: 100px;
             max-height: 100px;
         }
+        
     </style>
 </head>
 <body>
@@ -58,10 +66,24 @@ while ($row = mysqli_fetch_assoc($result)) {
 $order_number = 1;
 $unique_array = array_unique($dateArray);
 echo "<h2>Order Details</h2>";
+echo "<div class='order'>";
+
+
 foreach ($unique_array as $date) {
+
+
+
+    $sql119= "SELECT complete FROM statustable WHERE order_id='$order_number'";
+    $result119 = mysqli_query($con, $sql119);
+    $row119 = mysqli_fetch_assoc($result119);
+
+    $r_time = $row119['complete'];
+
     echo "<div class='order-details'>";
     echo "<h3>Order Number: $order_number</h3>";
     echo "<p>Order Date and Time: $date</p>";
+    echo "<p>Araived: $r_time</p>";
+
 
     
     $sql = "SELECT * FROM pay WHERE  ord_date_time='$date'";
@@ -108,30 +130,30 @@ foreach ($unique_array as $date) {
         if($i==0){
             if ($status1 == "proccesing") {
                 echo "<td rowspan='$row_count'>
-                <p>If the product has reached you, <br> please click the button</p>
+                <p>If the product has been delivered, <br> please click the button</p>
                         <form action='status-change.php' method='post'>
-                            <input type='hidden' name='order_date_time' value='$status'>
+                            <input type='hidden' name='order_date_time' value='$order_number'>
                             <button name='status' type='submit' style='background-color: pink;  padding: 10px; border: none; cursor: pointer ' >$status1</button>                   
                         </form></td>";
             } elseif ($status1 == "Deliverd") {
                 echo "<td rowspan='$row_count'>
-                <p>If the product has reached you, <br> please click the button</p>
+                <p>If the product has been delivered, <br> please click the button</p>
                         <form action='status-change.php' method='post'>
-                            <input type='hidden' name='order_date_time' value='$status'>
-                            <button name='status' type='submit' style='background-color: blue; color: white; padding: 10px; border: none; cursor: pointer; transition: background-color 0.3s;'>$status1</button>                   
+                            <input type='hidden' name='order_date_time' value='$order_number'>
+                            <button name='status' type='submit' style='background-color: blue; color: white; padding: 10px; border: none; cursor: not-allowed; transition: background-color 0.3s;'  disabled>$status1</button>                   
                         </form></td>";
             } elseif ($status1 == "order reached") {
                 echo "<td rowspan='$row_count'>
-                <p>If the product has reached you, <br> please click the button</p>
+                <p>If the product has been delivered, <br> please click the button</p>
                         <form action='status-change.php' method='post'>
-                            <input type='hidden' name='order_date_time' value='$status'>
+                            <input type='hidden' name='order_date_time' value='$$order_number'>
                             <button name='status' type='submit' style='background-color: green; color: white; padding: 10px; border: none; cursor: not-allowed;' disabled>$status1</button>                   
                         </form></td>";
             }else{
                 echo "<td rowspan='$row_count'>
-                <p>If the product has reached you, <br> please click the button</p>
+                <p>If the product has been delivered, <br> please click the button</p>
                         <form action='status-change.php' method='post'>
-                            <input type='hidden' name='order_date_time' value='$St'>
+                            <input type='hidden' name='order_date_time' value='$order_number'>
                             <button name='status' type='submit' style='background-color: pink;  padding: 10px; border: none; cursor: pointer '>$status1</button>                   
                         </form></td>";
 
@@ -148,6 +170,7 @@ foreach ($unique_array as $date) {
     echo "</div>";
     $order_number++; 
 }
+echo "</div>";
 
 // Close database connection
 mysqli_close($con);

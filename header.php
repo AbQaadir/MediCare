@@ -12,6 +12,21 @@ require_once 'config/config-session.php';
 	<link rel="stylesheet" href="profile.css">
 	<link rel="stylesheet" href="product.css">
 	<link rel="stylesheet" href="cart-button.css">
+	<style>
+		 .order{
+			background-color: #f00;
+            color: #eee;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: Poppins;
+            width: 100%;
+            border-radius: 10px;
+            padding-right: 10px;
+			color: #f00;
+		}
+
+	</style>
 </head>
 
 <body>
@@ -46,6 +61,15 @@ require_once 'config/config-session.php';
 				
 				?>
 
+				<?php 
+				$con = mysqli_connect("localhost", "root", "", "medicare");
+				$sql555 = "SELECT * FROM statustable WHERE status LIKE '%proccesing%'";
+				$result555 = mysqli_query($con, $sql555);
+				$row555 = mysqli_num_rows($result555);
+				
+
+				?>
+
 
 
 				<?php if (isset($_SESSION["userType"])) : ?>
@@ -53,6 +77,7 @@ require_once 'config/config-session.php';
 					<?php if ($_SESSION["userType"] === "admin") : ?>
 						<li><a href="profile.php">Profile</a></li>
 						<li><a href="admin-dashboard.php">Dashboard</a></li>
+						<li class="order"><a href="test-q-for-admin.php" class="btn btn-danger">Orders(<?= $row555 ?>)</a></li>
 					<?php elseif ($_SESSION["userType"] === "user") : ?>
 						<li><a href="profile.php">Profile</a></li>
 

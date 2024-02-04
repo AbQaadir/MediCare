@@ -7,6 +7,7 @@ if(isset($_POST['status'])){
 
     $sql = "UPDATE statustable SET status = 'Deliverd' WHERE order_id = '$dateTime'";
     $result = mysqli_query($con, $sql);
+    
 
     echo "<script>alert('Order status updated successfully!'); window.location.href = 'test-q-for-admin.php';</script>";
     exit;
