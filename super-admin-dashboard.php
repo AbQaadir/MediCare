@@ -82,7 +82,7 @@
         <a href="admins.php" class="btn btn-success">View Admins</a>
         <a href="users.php" class="btn btn-danger">View Users</a>
         <a href="add-new-products.php" class="btn btn-warning">Add Products</a>
-        <a href="add-new-products.php" class="btn btn-danger">Orders</a>
+        
     </div>
 </body>
 

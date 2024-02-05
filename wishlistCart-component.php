@@ -7,26 +7,35 @@ function wishCartElements($productimg, $productname, $productprice, $productid)
   $filename = "uploads/".basename($productimg);
 
   $element = "<hr><div class=\"item\" data-product-id=\"$productid\">
-     <form action=\"cart-new.php?action=removee&id=$productid\" method=\"post\" class=\"cart-items\" >
+     <form action=\"wishlist.php?action=removee&id=$productid\" method=\"post\" class=\"cart-items\" >
     <div class=\"item\" data-product-id=\"<?php echo $productid; ?>\">
               <div class=\"image\">
                   <img src=\"$filename\" >
               </div>
               <div class=\"productName\">
-              $productname
+                   $productname
               </div>
 
               <div class=\"totalPrice\">
-              LKR.$productprice./=
+                   LKR.$productprice./=
               </div
               <div>
-                <button class=\"removee\">Remove</button>
+                    <button name='remove' class=\"removee\">Remove</button>
+
+                    
+                  <button name='add-by-wish' class='add-to-cart-btn' data-product-id='$productid'>Add to Cart</button>
+                  
               </div>
+              
+                  
+            
+
+
       
     </div>
          
 </form>
-       </div> 
+      
        <hr>";
   return $element;
 }

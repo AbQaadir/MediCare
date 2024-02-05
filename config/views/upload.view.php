@@ -46,23 +46,24 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         // If user is not logged in or doesn't have necessary privileges, display login prompt
         $html .= "<form action='login.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>Add to Cart</button>";
+        $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>Add to Cart  ♡
+        </button>";
         $html .= "</form>";
     }
 
-    // if (isset($_SESSION['email'])) {
+    if (isset($_SESSION['email'])) {
         
-    //     $html .= "<form action='wishlist-button.php' method='post'>";
-    //     $html .= "<input type='hidden' name='product_id' value='$id'>";
-    //     $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
-    //     $html .= "</form>";
-    // } else {
-    //     // If user is not logged in or doesn't have necessary privileges, display login prompt
-    //     $html .= "<form action='login.php' method='post'>";
-    //     $html .= "<input type='hidden' name='product_id' value='$id'>";
-    //     $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
-    //     $html .= "</form>";
-    // }
+        $html .= "<form action='wishlist-button.php' method='post'>";
+        $html .= "<input type='hidden' name='product_id' value='$id'>";
+        $html .= "<button name='wishlist' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "</form>";
+    } else {
+        // If user is not logged in or doesn't have necessary privileges, display login prompt
+        $html .= "<form action='login.php' method='post'>";
+        $html .= "<input type='hidden' name='product_id' value='$id'>";
+        $html .= "<button name='wishlist' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "</form>";
+    }
 
 
 

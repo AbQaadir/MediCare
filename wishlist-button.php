@@ -21,41 +21,47 @@ $con = mysqli_connect("localhost", "root", "", "medicare");
 $sql8 = "SELECT product_id FROM wishlist WHERE user_id ='$userId' ";
 
 $result8 = mysqli_query($con, $sql8);
+$num = mysqli_num_rows($result8);
 
 $idArray = array();
 
-while ($row8 = mysqli_fetch_assoc($result8)) {
-  $idArray[] = $row8['product_id'];
+if($num != 0) {
+  while ($row8 = mysqli_fetch_assoc($result8)) {
+    $idArray[] = $row8['product_id'];
+  }
 }
 
 
 
 
-if (isset($_POST['add'])) {
+if (isset($_POST['wishlist']) || isset($_SESSION['w_id']) ){
 
-
-  $id = $_POST['product_id'];
-  $sql30 = "SELECT qty_p FROM products WHERE id ='$id'";
+if(isset($_SESSION['w_id'])){
+    $product_id = $_SESSION['w_id'];
+}else{
+    $product_id = $_POST['product_id'];
+}
+  
+  $sql30 = "SELECT qty_p FROM products WHERE id ='$product_id'";
   $result30 = mysqli_query($con, $sql30);
   $row30 = mysqli_fetch_assoc($result30);
 
 
 
+    if (isset($_SESSION['add_cart']) || isset($_SESSION['w_id'])) {
 
-
-    if (isset($_SESSION['add_cart'])) {
-
-
-      if ((in_array($_POST['product_id'], $idArray))) {
+    if ((in_array($_POST['product_id'], $idArray)) || (in_array($_SESSION['w_id'], $idArray))) {
 
         echo "<script>alert('product is already added in the cart..!'); window.location.href = 'index.php'; </script>";
       } else {
 
-
-
         $_SESSION['add_cart'][$count] = $item_array;
         $email = $_SESSION["email"];
-        $product_id = $_POST['product_id'];
+        if(isset($_SESSION['w_id'])){
+            $product_id = $_SESSION['w_id'];
+        }else{
+            $product_id = $_POST['product_id'];
+        }
         $con = mysqli_connect("localhost", "root", "", "medicare");
         $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
         UNION
@@ -71,17 +77,16 @@ if (isset($_POST['add'])) {
         header('location:index.php');
       }
     } else {
-
-      if ((in_array($_POST['product_id'], $idArray))) {
-
-
-        echo "<script>alert('product is already added in the wishlist..!'); window.location.href = 'index.php';</script>";
+       if ((in_array($_POST['product_id'], $idArray)) || (in_array($_SESSION['w_id'], $idArray))) {
+       echo "<script>alert('product is already added in the wishlist..!'); window.location.href = 'index.php';</script>";
       } else {
-
-
-
         $email = $_SESSION["email"];
-        $product_id = $_POST['product_id'];
+        
+        if(isset($_SESSION['w_id'])){
+            $product_id = $_SESSION['w_id'];
+        }else{
+            $product_id = $_POST['product_id'];
+        }
         $con = mysqli_connect("localhost", "root", "", "medicare");
         $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
         UNION

@@ -1,3 +1,4 @@
+<?php require_once 'header.php';  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 <body>
 
 <?php
-session_start();
+
 $con = mysqli_connect("localhost", "root", "", "medicare");
 
 $email = $_SESSION["email"];
@@ -243,6 +244,8 @@ echo "</div>";
 // Close database connection
 mysqli_close($con);
 ?>
-
+    <?php
+require_once 'footer.php';
+?>
 </body>
 </html>

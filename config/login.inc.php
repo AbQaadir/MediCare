@@ -57,10 +57,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION["userType"] = $userType["table_name"];
         $_SESSION["email"] = $result["email"];
 
+        if(isset($_SESSION["w_id"])){ 
+          require_once '../wishlist-button.php';
+         }
+
+
+
        
 
 
-        if(isset($_SESSION["p_id"])){ 
+if(isset($_SESSION["p_id"])){ 
 $email = $_SESSION["email"];
 $con = mysqli_connect("localhost", "root", "", "medicare");
 $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
@@ -163,8 +169,13 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
         $pdo = null;
         $state = null;
         exit();
+        
 
-
+    }else if(isset($_SESSION['direct-to-wish'])){
+      echo "<script>window.location.href = '../wishlist.php';</script>";
+      $pdo = null;
+      $state = null;
+      exit();
     }
 
     header('location: ../index.php');

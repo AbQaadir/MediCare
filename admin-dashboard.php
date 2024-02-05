@@ -40,7 +40,7 @@
 <body>
     <div class="button-container">
         <button class="stylish-button"><a href="add-new-products.php">Add Product</a></button>
-        <button class="stylish-button"><a href="test-q-for-admin.php">Orders</a></button>
+        
     </div>
 </body>
 </html>

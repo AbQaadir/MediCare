@@ -1,7 +1,8 @@
 <?php
-session_start();
+
+require_once 'header.php';
 require_once('cart-component.php');
-require_once('getdata.php');
+// require_once('getdata.php');
 
 
 
@@ -161,14 +162,25 @@ else if (isset($_GET['action'])) {
 
     <style>
         .cartTab .btn button {
-            background-color: yellow;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: Poppins;
-            width: 100%;
-            border-radius: 10px;
-        }
+    background-color: #0866ff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.cartTab .btn button:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Lift the button slightly on hover */
+}
+
 
         .cartTab .btn .close {
             background-color: red;
@@ -183,7 +195,7 @@ else if (isset($_GET['action'])) {
 
         .cartTab .listCart .item {
             display: grid;
-            grid-template-columns: 100px 150px 150px 150px 150px;
+            grid-template-columns: 100px 150px 150px 180px 150px;
             gap: 10px;
             text-align: center;
             align-items: center;
@@ -208,7 +220,7 @@ else if (isset($_GET['action'])) {
         }
 
         .listCart .item:nth-child(odd) {
-            background-color: #fff;
+            background-color: lightblue;
         }
 
         .listCart {
@@ -218,30 +230,34 @@ else if (isset($_GET['action'])) {
             overflow: auto;
             background-color: #fff;
             width: 65%;
+            height: 455px;
+            
         }
 
         .listCart::-webkit-scrollbar {
             width: 0;
         }
+       
 
         .cartTab {
             background-color: #eee;
-            color: #eee;
-            position: fixed;
-            left: 10%;
-
+            color: #eee;           
+            margin-left: 10%;
             width: 80%;
-            top: 0;
+            /* top: 100px; */
+            height: 640px;
             bottom: 0;
             display: grid;
             grid-template-rows: 70px 1fr 70px;
+            -moz-appearance: textfield;
+            appearance: textfield;
+            overflow: auto;
 
         }
 
         .cartTab h1,
         h4 {
             text-align: center;
-            padding: 20px 0;
             font-size: 30px;
             color: black;
         }
@@ -253,15 +269,24 @@ else if (isset($_GET['action'])) {
         }
 
         .removee {
-            background-color: red;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: Poppins;
-            width: 100%;
-            border-radius: 10px;
-            padding-right: 10px;
-        }
+    background-color: #ff4d4d; /* Red background color */
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08); /* Adding box shadow for 3D effect */
+    transition: all 0.3s ease; /* Adding transition for smooth hover effect */
+}
+
+.removee:hover {
+    background-color: #e60000; /* Darker shade of red on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Lift the button slightly on hover */
+}
+
 
         .in {
             width: 50px;
@@ -297,7 +322,7 @@ else if (isset($_GET['action'])) {
         }
 
         .ccc {
-            background-color: #f00;
+            background-color: lightblue;
         }
 
         body {
@@ -321,17 +346,25 @@ else if (isset($_GET['action'])) {
         }
 
         .checkout {
-            margin-top: 20px;
-            background-color: #f00;
-            color: #eee;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: Poppins;
-            width: 100%;
-            border-radius: 10px;
-            padding-right: 10px;
+            background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
         }
+
+        .checkout:hover {
+            background-color: #45a049; /* Darker shade of green on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Change background color on hover */
+}
+    
         .cart-to-index-page-button {
     display: block;
     margin: 0 auto; /* Center the button horizontally */
@@ -343,6 +376,8 @@ else if (isset($_GET['action'])) {
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
+
+
 
 .cart-to-index-page-button:hover {
     background-color: #0454c2; /* Change background color on hover */
@@ -385,10 +420,10 @@ else if (isset($_GET['action'])) {
 
 <body>
     <div class="cartTab">
-        <h1> </h1>
+        <h1>Shopping Cart </h1>
         <div class="listTotal">
             <div class="listCart">
-                <h1>Shopping Cart</h1>
+                
 
                 <?php
                 $total = 0;
@@ -551,18 +586,10 @@ else if (isset($_GET['action'])) {
 
                 <?php if (isset($_SESSION["userType"])){
                         if ($_SESSION["userType"] === "admin"){echo '
-                            <form action="test-q-for-admin.php" method="post">
-                                <div class="btn">
-                                    <button type="submit">orders</button>                   
-                                </div>
-                            </form>
+                            
                             ';}
                         else if($_SESSION["userType"] === "superadmin"){echo '
-                            <form action="test-q-for-admin.php" method="post">
-                                <div class="btn">
-                                    <button type="submit">orders</button>                   
-                                </div>
-                            </form>
+                            
                             ';}
                         else {
                            
@@ -605,6 +632,9 @@ else if (isset($_GET['action'])) {
 
     
     ?>
+    <?php
+require_once 'footer.php';
+?>
 </body>
 
 </html>
