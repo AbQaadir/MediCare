@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-function searchProducts(object $pdo, string $keyword): array|false
+function searchProducts(PDO $pdo, string $keyword): array|false
 {
-    // Prepare the SQL query
-    $query = "SELECT * FROM products WHERE fileName LIKE '%$keyword%' OR description LIKE '%$keyword%'";
+    // Prepare the SQL query with placeholders
+    $query = "SELECT * FROM products WHERE LOWER(productName) LIKE LOWER(:keyword) OR LOWER(description) LIKE LOWER(:keyword)";
+
+    // Bind the keyword parameter
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
 
     // Execute the query
-    $stmt = $pdo->prepare($query);
     $stmt->execute();
 
     // Check if any rows were returned
