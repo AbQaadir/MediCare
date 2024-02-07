@@ -7,6 +7,7 @@ if (isset($_POST["submit"])) {
     $price = $_POST["price"];
     $category = $_POST["category"];
     $quantity = $_POST["qty_p"];
+    $adminEmail = $_POST["session_email"];
 
 
     try {
@@ -78,7 +79,7 @@ if (isset($_POST["submit"])) {
         echo $quantity;
 
         // If no errors, create user in the database
-        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity);
+        createUpload($pdo, $fileNameNew, $fileDestination, $productName, $description, $price, $category, $quantity,$adminEmail);
 
         header("Location: ../index.php?upload=success");
         $pdo = null;

@@ -60,11 +60,11 @@ require_once 'config/config-session.php';
 
 
 				<li><a href="index.php">Home</a></li>
-				<li><a href="#">Blog<i class="ti-angle-down"></i></a>
+				<!-- <li><a href="#">Blog<i class="ti-angle-down"></i></a>
 					<ul class="dropdown">
 						<li><a href="blog-single-sidebar.php">Blog Single Sidebar</a></li>
 					</ul>
-				</li>
+				</li> -->
 				<li><a href="contact-us.php">Contact Us</a></li>
 				<?php
 				

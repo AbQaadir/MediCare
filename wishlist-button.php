@@ -51,7 +51,7 @@ if(isset($_SESSION['w_id'])){
     if (isset($_SESSION['add_cart']) || isset($_SESSION['w_id'])) {
 
     if ((in_array($_POST['product_id'], $idArray)) || (in_array($_SESSION['w_id'], $idArray))) {
-
+      unset($_SESSION["w_id"]);
         echo "<script>alert('product is already added in the cart..!'); window.location.href = 'index.php'; </script>";
       } else {
 
@@ -73,11 +73,12 @@ if(isset($_SESSION['w_id'])){
         $userId = $row1['user_id'];
         $sql6 = "INSERT INTO wishlist (user_id, product_id) VALUES ('$userId', '$product_id' )";
         $update_quantity_query1 = mysqli_query($con, $sql6);
-
+        unset($_SESSION["w_id"]);
         header('location:index.php');
       }
     } else {
        if ((in_array($_POST['product_id'], $idArray)) || (in_array($_SESSION['w_id'], $idArray))) {
+        unset($_SESSION["w_id"]);
        echo "<script>alert('product is already added in the wishlist..!'); window.location.href = 'index.php';</script>";
       } else {
         $email = $_SESSION["email"];
@@ -98,7 +99,7 @@ if(isset($_SESSION['w_id'])){
         $userId = $row1['user_id'];
         $sql6 = "INSERT INTO wishlist (user_id, product_id) VALUES ('$userId', '$product_id' )";
         $update_quantity_query1 = mysqli_query($con, $sql6);
-
+        unset($_SESSION["w_id"]);
         header('location:index.php');
       }
     }

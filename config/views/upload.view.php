@@ -36,6 +36,9 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
     $html .= "<div class='product-description'>$description</div>";
 
 
+    
+
+
 
     if (isset($_SESSION['email'])) {
 
@@ -66,8 +69,16 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         $html .= "</form>";
     }
 
+    if (isset($_SESSION['email'])) {
+    if(($_SESSION["userType"] === "admin") || ($_SESSION["userType"] === "superadmin")){
+        $html .= "<form action='delete.php' method='post'>";
+        $html .= "<input type='hidden' name='product_id' value='$id'>";
+        $html .= "<button name='delete'   class='add-to-cart-btn' data-product-id='$id'>Delete</button>";
+        $html .= "</form>";
 
+    }}
 
+    
     $html .= "</div>";
 
     echo $html;

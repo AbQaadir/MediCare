@@ -1,6 +1,9 @@
 <?php
 require_once 'config/config-session.php';
 require_once 'config/views/upload.view.php';
+
+$email =$_SESSION["email"];
+echo $email;
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +65,9 @@ require_once 'config/views/upload.view.php';
             <div class="mb-3 col-md-5 mx-auto">
                 <label for="productImage" class="form-label col-md-6 mx-auto">Choose a Product Image (550 X 750):</label>
                 <input type="file" class="form-control col-md-6 mx-auto" id="productImage" name="productImage" accept="image/*" required>
+            </div>
+            <div>
+            <input type="hidden" name="session_email" value="<?php echo $email?>">
             </div>
             <div class="mb-3 col-md-5 mx-auto">
                 <button type="submit" class="btn btn-primary col-md-5 mx-auto" name="submit">Submit</button>

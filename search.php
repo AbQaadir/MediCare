@@ -11,12 +11,16 @@ require_once 'config/views/search.view.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search result</title>
+    <title>Search</title>
     <link rel="stylesheet" href="search.css">
 </head>
 
 <body>
     <main>
+        <div>
+            <h1>Search results</h1>
+        </div>
+
         <div class="row">
             <?php
             if (isset($_SESSION['noProducts'])) {

@@ -67,7 +67,6 @@ function showAllSearchResults(array $results)
         $productLink = "product.php?id=$id";
         $productName = $result['productName'];
         $productPrice = $result['price'];
-
         searchProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }

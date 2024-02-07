@@ -60,14 +60,14 @@ $sql20 = "INSERT INTO user_details (name, email, telephone, address, user_id)
 mysqli_query($con, $sql20);
 
 // Fetch user details from user_details table
-$sql5 = "SELECT * FROM user_details WHERE user_id ='$userId'";
+$sql5 = "SELECT * FROM shipping_info WHERE ship_email='$email'";
 $result = mysqli_query($con, $sql5);
 $row21 = mysqli_fetch_assoc($result);
 
-$email1 = $row21['email'];
-$name1 = $row21['name'];
-$tel1 = $row21['telephone'];
-$address1 = $row21['address'];
+$email1 = $row21['ship_email'];
+$name1 = $row21['ship_name'];
+$tel1 = $row21['ship_number'];
+$address1 = $row21['ship_address'];
 
 
 
@@ -150,7 +150,7 @@ mysqli_close($con);
     cursor: pointer;
     font-weight: 500;
     font-family: Poppins;
-    width: 20%;
+    width: 100%;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     margin-bottom: 10px;
@@ -429,8 +429,10 @@ mysqli_close($con);
 
             
                     
-
-                    <button class="edit_btn" onclick="openPopup()">change</button></div>
+<form action="updateShipping.php">
+<button type='sumbit' class="edit_btn" >change</button></div>
+</form>
+                   
 
            
 

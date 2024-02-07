@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function searchProducts(object $pdo, string $keyword): array|false
+function searchProducts(PDO $pdo, string $keyword): array|false
 {
     // Prepare the SQL query
     $keyword = "%$keyword%"; // Assuming $keyword contains the search term

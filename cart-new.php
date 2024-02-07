@@ -580,7 +580,7 @@ else if (isset($_GET['action'])) {
 
                 <hr>
 
-                <form action="payment-cash.php" method="post">
+                <form action="shipping.php" method="post">
                     <div class="bt">
                         <button id="checkout" name="checkout" type="submit" class="checkout"> PROCEED TO CHECKOUT (<?php echo $counts ?>)</button>
                     </div>
