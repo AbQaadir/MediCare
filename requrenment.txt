@@ -1,0 +1,15 @@
+Add this table to the database
+
+CREATE TABLE shipping_info (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ship_name VARCHAR(255) NOT NULL,
+    ship_number VARCHAR(20) NOT NULL,
+    ship_address VARCHAR(255) NOT NULL,
+    ship_city VARCHAR(100) NOT NULL,
+    ship_zip VARCHAR(20) NOT NULL,
+    ship_country VARCHAR(100) NOT NULL,
+    ship_email VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
