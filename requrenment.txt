@@ -1,3 +1,4 @@
+1 ->
 Add this table to the database
 
 CREATE TABLE shipping_info (
@@ -13,3 +14,8 @@ CREATE TABLE shipping_info (
 );
 
 
+2 ->
+join the procced to checkout button with shhiping.php
+
+3 ->
+make sure work properly
