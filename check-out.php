@@ -1,7 +1,8 @@
 <?php
-session_start();
 
-require_once("getdata.php");
+require_once 'header.php';
+
+// require_once("getdata.php");
 require_once("check_out_componets.php");
 
 
@@ -103,6 +104,65 @@ mysqli_close($con);
 <head>
     <title>Payment Form</title>
     <style>
+        .online {
+            background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+        }
+
+        .online:hover {
+            background-color: #45a049; /* Darker shade of green on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Change background color on hover */
+}
+
+.cash {
+            background-color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-top: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+        }
+
+        .cash:hover {
+            background-color: #45a049; /* Darker shade of green on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Change background color on hover */
+}
+
+.edit_btn {
+            background-color: blueviolet;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: Poppins;
+    width: 20%;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+        }
+
+        .edit_btn:hover {
+            background-color: blue; /* Darker shade of green on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1); /* Increase shadow on hover */
+    transform: translateY(-1px); /* Change background color on hover */
+}
         .cartTab .listCart .item img {
             width: 80%;
             height: 80%;
@@ -135,7 +195,7 @@ mysqli_close($con);
             margin: 10px 10px 10px 10px;
             padding: 10px 10px 10px 10px;
             overflow: auto;
-            background-color: #fff;
+            background-color:  #fff;
             width: 95%;
         }
 
@@ -147,6 +207,12 @@ mysqli_close($con);
 
             color: #eee;
             position: relative;
+            background-color: lightblue;
+            margin-right: 10px;
+            border-radius: 15px;
+
+            height: 460px;
+            overflow: auto;
 
 
             width: 100%;
@@ -167,6 +233,8 @@ mysqli_close($con);
         .big {
             display: flex;
             flex-direction: column;
+            margin-top: 10px;
+            margin-right: 10px;
         }
 
         .total {
@@ -189,7 +257,7 @@ mysqli_close($con);
         }
 
         .ccc {
-            background-color: #f00;
+            background-color: lightblue;
         }
 
         body {
@@ -226,17 +294,7 @@ mysqli_close($con);
         z-index: 9998;
     }
 
-    .edit_btn{
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        width: 100px;
-    }
+   
 
     .popup input {
         width: 100%; /* Set input width to 100% */
@@ -269,6 +327,65 @@ mysqli_close($con);
         h5{
             width: 60%;
         }
+        .popup {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.popup h2 {
+    margin-top: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.popup form {
+    margin-bottom: 20px;
+}
+
+.popup label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.popup input {
+    width: 95%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.popup button {
+    background-color: #0866ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.popup button[type="button"] {
+    background-color: #ff4d4d; /* Red for cancel button */
+}
+
+.popup button[type="button"]:hover {
+    background-color: #e60000; /* Darker shade of red on hover */
+}
+
     
     </style>
 </head>
@@ -300,8 +417,8 @@ mysqli_close($con);
 
 
         <label for="telephone">Telephone Number: </label><br>
-        <input style="width: 9%;" type="text" value="+94" readonly>
-        <input style="width: 86%;" type="number" id="telephone" name="telephone"   value="<?php $firstThreeDigits = substr($tel1, 3); echo $firstThreeDigits; ?>" required><br>
+        <input style="width: 7%;" type="text" value="+94" readonly>
+        <input style="width: 83%;" type="number" id="telephone" name="telephone"   value="<?php $firstThreeDigits = substr($tel1, 3); echo $firstThreeDigits; ?>" required><br>
 
         <div id="phoneError" class="error"></div><br>
 
@@ -311,7 +428,7 @@ mysqli_close($con);
         
 
        <form action="check-out.php" method="post">
-       <button name="change" type="submit">Save Changes</button>
+       <button  name="change" type="submit">Save Changes</button>
        </form>
         
     </form>
@@ -504,6 +621,9 @@ $idArray[] = $row8['product_id'];}
            
         });
     </script>
+       <?php
+require_once 'footer.php';
+?>
 </body>
 
 </html>

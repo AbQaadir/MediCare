@@ -10,6 +10,14 @@ if (isset($_POST['add'])) {
         $id_P = $_SESSION["p_id"];
 
        }
+
+       if (isset($_POST['wishlist'])) {
+        $_SESSION["w_id"] =$_POST['product_id'];}
+    
+        if(isset($_SESSION["w_id"])){ 
+            $id_w = $_SESSION["w_id"];
+    
+           }
    
    
 ?>

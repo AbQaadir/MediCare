@@ -11,7 +11,7 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/index.php">Home</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Services</a></li>
                 </ul>
@@ -19,14 +19,14 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <ul>
-                    <li>Name: Abdul Qaadir</li>
-                    <li>Email: soloqaadir@gmail.com</li>
+                    <li>Name: Medicare </li>
+                    <li>Email: medicare@gmail.com</li>
                     <li>Address: No 257, Fencis Lane, Colombo.</li>
                 </ul>
-            </div>
+            </div
         </div>
         <div class="footer-bottom">
-            <p>Copyright © 2020 <a href="https://web.facebook.com/Qaadir0124" target="_blank">Abdul Qaadir</a> - All Rights Reserved.</p>
+            <p>Copyright © 2020 <a href="#" target="_blank">Medicare</a> - All Rights Reserved.</p>
         </div>
     </footer>
 </body>

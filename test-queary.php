@@ -1,3 +1,4 @@
+<?php require_once 'header.php';  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,12 +23,17 @@
             max-width: 100px;
             max-height: 100px;
         }
+        .order{
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column-reverse;
+        }
     </style>
 </head>
 <body>
 
 <?php
-session_start();
+
 $con = mysqli_connect("localhost", "root", "", "medicare");
 
 $email = $_SESSION["email"];
@@ -119,7 +125,7 @@ $unique_array = array_unique($dateArray);
 $order_n = 1;
 
 echo "<h2>Order Details</h2>";
-
+echo "<div class='order'>";
 foreach ($unique_array as $date) {
     
         $St =$order_id[$order_n-1];
@@ -234,9 +240,12 @@ foreach ($unique_array as $date) {
     $order_n++;
 }
 
+echo "</div>";
 // Close database connection
 mysqli_close($con);
 ?>
-
+    <?php
+require_once 'footer.php';
+?>
 </body>
 </html>

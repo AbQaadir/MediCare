@@ -1,4 +1,5 @@
 <?php
+require_once 'header.php';
 require_once 'config/config-session.php';
 try {
     require_once 'config/db.inc.php';
@@ -43,6 +44,9 @@ try {
     <div class="card">
         <?php generateProfileHTML($name, $email, $phone); ?>
     </div>
+    <?php
+require_once 'footer.php';
+?>
 </body>
 
 </html>
