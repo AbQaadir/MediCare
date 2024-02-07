@@ -5,11 +5,12 @@ declare(strict_types=1);
 function searchProducts(object $pdo, string $keyword): array|false
 {
     // Prepare the SQL query
-    $query = "SELECT * FROM products WHERE LOWER(productName) LIKE LOWER(:keyword) OR LOWER(description) LIKE LOWER(:keyword)";
-
-    // Execute the query
-    $stmt = $pdo->prepare($query);
-    $stmt->execute();
+    $keyword = "%$keyword%"; // Assuming $keyword contains the search term
+    $stmt = $pdo->prepare("SELECT * FROM products 
+                           WHERE LOWER(productName) LIKE LOWER(?) 
+                           OR LOWER(description) LIKE LOWER(?)");
+    $stmt->execute([$keyword, $keyword]);
+    
 
     // Check if any rows were returned
     if ($stmt->rowCount() > 0) {

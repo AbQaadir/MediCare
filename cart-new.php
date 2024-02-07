@@ -139,6 +139,9 @@ else if (isset($_GET['action'])) {
     $result1 = mysqli_query($con, $sql1);
     $sql11 = "DELETE FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
     $result11 = mysqli_query($con, $sql11);
+
+    header('Location: cart-new.php');
+    exit;
 }
 
 }else{

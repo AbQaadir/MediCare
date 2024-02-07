@@ -385,6 +385,32 @@ mysqli_close($con);
 .popup button[type="button"]:hover {
     background-color: #e60000; /* Darker shade of red on hover */
 }
+@media screen and (max-width: 768px) {
+    .edit_btn {
+        width: 40%; /* Adjust width for smaller screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .edit_btn {
+        width: 60%; /* Adjust width for even smaller screens */
+    }
+}
+.checkoutdetails{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.checkoutdetails label{
+    /* margin-right: 100px; */
+    width: 350px;
+}
+
+.withbutton{
+    display: flex  ;
+    flex-direction: row;
+}
 
     
     </style>
@@ -394,13 +420,19 @@ mysqli_close($con);
     <div class="container">
         <div class="all">
             <div class="big">
-                
-                    <label for="name">Deliver to : <?php echo $name1; ?></label><br/>
-                    <label for="email">Email to : <?php echo  $email1; ?></label><br />
-                    <label for="telephone">Telephone Number :<?php echo $tel1; ?> </label><br />
-                    <label for="address">Home Address:<?php echo "<label style='color: red;'>".$address1."</label>"; ?></label><br />
 
-                    <button class="edit_btn" onclick="openPopup()">change</button>
+            <div class="withbutton"> <div class="details"><div class="checkoutdetails"><label for="name"> <b> Deliver to :</b> <?php echo $name1; ?></label><br/><br>
+                    <label for="email"><b>Email to :</b> <?php echo  $email1; ?></label><br /></div>
+                
+                    <div class="checkoutdetails"><label for="telephone"><b> Number :</b><?php echo $tel1; ?> </label><br ><br>
+                    <label for="address"><b> Address : </b><?php echo "<label style='color: red;'>".$address1."</label>"; ?></label><br /></div>        </div>
+
+            
+                    
+
+                    <button class="edit_btn" onclick="openPopup()">change</button></div>
+
+           
 
 <!-- Popup container -->
 <div class="popup" id="popup">

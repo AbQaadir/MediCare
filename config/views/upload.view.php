@@ -27,12 +27,13 @@ function checkUploadErrors()
 }
 
 
-function generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice)
+function generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice,$description)
 {
     $html = "<div class='product-item'>";
     $html .= "<a href='$productLink'><img src='$imageSrc' alt='$productName'></a>";
     $html .= "<div class='product-name'>$productName</div>";
     $html .= "<div class='product-price'>$productPrice</div>";
+    $html .= "<div class='product-description'>$description</div>";
 
 
 
@@ -55,13 +56,13 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         
         $html .= "<form action='wishlist-button.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='wishlist' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "<button name='wishlist' onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
         $html .= "</form>";
     } else {
         // If user is not logged in or doesn't have necessary privileges, display login prompt
         $html .= "<form action='login.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='wishlist' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "<button name='wishlist'  onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
         $html .= "</form>";
     }
 
@@ -84,7 +85,9 @@ function showAllPromotion()
         $productLink = "product-info.php";
         $productName = $row["productName"];
         $productPrice = "LKR " . $row["price"];
-        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
+        $description = $row["description"];
+       
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice, $description);
     }
 }
 
@@ -97,7 +100,8 @@ function showAllHeart()
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR " . $row["price"];
-        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
+        $description = $row["description"];
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice,$description);
     }
 }
 
@@ -110,7 +114,8 @@ function showAllEyes()
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR " . $row["price"];
-        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
+        $description= $row["description"];
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice,$description);
     }
 }
 
@@ -123,7 +128,8 @@ function showAllPersonalCare()
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR " . $row["price"];
-        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
+        $description = $row["description"];
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice,$description);
     }
 }
 
@@ -136,6 +142,7 @@ function showAllDiabetes()
         $productLink = "#";
         $productName = $row["productName"];
         $productPrice = "LKR " . $row["price"];
-        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
+        $description = $row["description"];
+        generateProductHTML($id, $imageSrc, $productLink, $productName, $productPrice,$description);
     }
 }

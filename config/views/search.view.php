@@ -1,6 +1,8 @@
 <?php
-
 declare(strict_types=1);
+
+require_once './header.php';
+require_once './footer.php';
 
 function checkSearchErrors()
 {
@@ -69,3 +71,4 @@ function showAllSearchResults(array $results)
         searchProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
+

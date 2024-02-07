@@ -6,7 +6,7 @@ if (isset($_POST["submit"])) {
     $description = $_POST["description"];
     $price = $_POST["price"];
     $category = $_POST["category"];
-    $quantity = $_POST["quantity"];
+    $quantity = $_POST["qty_p"];
 
 
     try {
