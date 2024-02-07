@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,50 +7,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Payment Form</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+/* Container for the form */
+/* Container for the form */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        form {
-            max-width: 400px;
-            margin: 50px auto;
-        }
+form {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%; /* Ensure the form takes full width */
+}
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
 
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 11px;
-        }
+/* Labels for the form fields */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
 
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            cursor: pointer;
-        }
+/* Radio button container */
+.radio-container {
+    display: inline-block;
+    margin-bottom: 10px;
+}
 
-        .card-type img {
-            height: 30px;
-            margin-right: 5px;
-        }
+/* Radio button input */
+.radio-container input[type="radio"] {
+    display: none;
+}
 
-        .error {
-            color: red;
-            margin-bottom: 10px;
-        }
+/* Radio button label */
+.radio-container label {
+    cursor: pointer;
+    padding-left: 25px; /* Adjust spacing between label and radio button */
+    position: relative;
+}
 
-        .visa {
-            width: 10%;
+/* Radio button visual indicator */
+.radio-container label:before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
 
-        }
+/* Radio button visual indicator (checked state) */
+.radio-container input[type="radio"]:checked + label:before {
+    background-color: #0866ff; /* Color when radio button is checked */
+    border-color: #0866ff;
+}
 
-        .master {
-            width: 10%;
-        }
+/* Input fields */
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Submit button */
+input[type="submit"] {
+    background-color: #0866ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+/* Submit button hover effect */
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker shade of blue on hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+img{
+    width: 400px;
+    height: 60px;
+}
+
     </style>
 </head>
 
@@ -223,6 +280,63 @@
                 // Insert the product into the 'pay' table
                 $sql14 = "INSERT INTO pay (user_id, product_id, qty) VALUES ('$userId', '$product_id', '$qty')";
                 $result14 = mysqli_query($con, $sql14);
+
+
+
+                $con = mysqli_connect("localhost", "root", "", "medicare");
+
+                $email = $_SESSION["email"];
+                $sql5 = "SELECT user_id FROM loginfo WHERE email ='$email'
+                        UNION
+                        SELECT user_id FROM superadmin WHERE email ='$email'  
+                        UNION
+                        SELECT user_id FROM admin WHERE email ='$email'";
+                
+                $result = mysqli_query($con, $sql5);
+                $row1 = mysqli_fetch_assoc($result);
+                
+                $sql = "SELECT ord_date_time, user_id FROM pay ORDER BY ord_date_time ASC";
+                $result = mysqli_query($con, $sql);
+                $dateArray = array();
+                
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $dateArray[] = $row['ord_date_time'];}
+                $order_number = 1;
+                $unique_array = array_unique($dateArray);
+                
+                foreach ($unique_array as $date) {
+                
+                    $sql = "SELECT * FROM pay WHERE  ord_date_time='$date'";
+                    $result = mysqli_query($con, $sql);
+                    $row_count = mysqli_num_rows($result);
+                   
+                    $i=0;
+                    $j=0;
+                    while ($row = mysqli_fetch_assoc($result)) {
+                
+                       $ord_date_time_new = $row['ord_date_time'];
+                        $product_id = $row['product_id'];
+                        $sql1 = "SELECT * FROM products WHERE id='$product_id'";
+                        $result1 = mysqli_query($con, $sql1);
+                        $row1 = mysqli_fetch_assoc($result1);
+                        $product_name = $row1['productName'];
+                        $product_price = $row1['price'];
+                        $product_image = $row1['fileDestination'];
+                        $filename = "uploads/" . basename($product_image);
+                        $product_quantity = $row['qty'];
+                        $user_id = $row['user_id'];
+                        $status = "proccesing";
+                        $sql100 ="INSERT INTO statusTable (order_id, user_id, product_id, status) VALUES ('$order_number', '$user_id', '$product_id', ' $status')";
+                        $result100 = mysqli_query($con, $sql100);
+                        $sql101 = "SELECT status FROM statusTable WHERE order_id = '$order_number'";
+                        $result101 = mysqli_query($con, $sql101);
+                        $row101 = mysqli_fetch_assoc($result101);
+                        $status1 = $row101['status'];
+                
+                 $i++;
+                    }
+                    $order_number++; 
+                }
 
 
 
