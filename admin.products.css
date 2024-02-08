@@ -1,0 +1,84 @@
+/* Official CSS Style for Product Display */
+
+/* Card container */
+.col-4 {
+    width: 33.3333%;
+    padding: 10px;
+}
+
+/* Card styles */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Image within the card */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+/* Card body styles */
+.card-body {
+    padding: 15px;
+}
+
+/* Title of the product */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Description of the product */
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+/* Primary button styles */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Danger button styles */
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Button hover styles */
+.btn:hover {
+    filter: brightness(110%);
+}
+
+/* Hover styles for primary button */
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Hover styles for danger button */
+.btn-danger:hover {
+    background-color: #c82333;
+}

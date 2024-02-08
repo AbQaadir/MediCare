@@ -1,0 +1,164 @@
+.contact-us {
+    background-color: #f7f7f7;
+    padding: 40px 0;
+}
+
+.contact-us .title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+.contact-us .title h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #000;
+}
+
+/* .contact-us .form {
+    width: 50%;
+    margin: 0 auto;
+} */
+
+.contact-us .form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+.contact-us .form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-us .form .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.contact-us .form .form-group label span {
+    color: #ff0000;
+}
+
+.contact-us .form .form-group input,
+.contact-us .form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #000;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.contact-us .form .form-group textarea {
+    resize: none;
+    height: 150px;
+}
+
+.contact-us .form .form-group button {
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-us .form .form-group button:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+/* news subscription */
+.shop-newsletter {
+    background-color: #f7f7f7;
+    padding: 40px 0;
+}
+
+/* .shop-newsletter .inner {
+	width: 50%;
+	margin: 0 auto;
+} */
+
+.shop-newsletter .inner {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+
+
+.shop-newsletter .inner h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.shop-newsletter .inner p {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.shop-newsletter .inner .newsletter-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shop-newsletter .inner .newsletter-inner input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 14px;
+    color: #000;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.shop-newsletter .inner .newsletter-inner button {
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+
+.shop-newsletter .inner .newsletter-inner button:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+
+
+@media (max-width: 767px) {
+
+    .shop-newsletter .inner h4,
+    .shop-newsletter .inner p {
+        text-align: center;
+    }
+
+    .shop-newsletter .inner .newsletter-inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .shop-newsletter .inner .newsletter-inner input {
+        margin-bottom: 10px;
+    }
+}

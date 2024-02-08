@@ -5,7 +5,7 @@ $adminEmail = $_SESSION["email"];
 
 $con = mysqli_connect("localhost", "root", "", "medicare");
 
-$query = "SELECT COUNT(*) AS count FROM products WHERE adminEmail = '$adminEmail' AND id = '$id'";
+$query = "SELECT COUNT(*) AS count FROM products WHERE id = '$id'";
 $result = mysqli_query($con, $query);
 
 if ($result) {
@@ -14,7 +14,7 @@ if ($result) {
     
     if ($count == 1) {
         // Execute delete query
-        $delete_query = "DELETE FROM products WHERE adminEmail = '$adminEmail' AND id = '$id'";
+        $delete_query = "DELETE FROM products WHERE id = '$id'";
         $delete_result = mysqli_query($con, $delete_query);
         
         if ($delete_result) {
@@ -35,7 +35,7 @@ if ($result) {
     } else {
         ?>
         <script>
-            alert("This product was not added by you.");
+            
             window.location.href = 'index.php';
         </script>
         <?php

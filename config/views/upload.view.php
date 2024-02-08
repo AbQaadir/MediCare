@@ -33,7 +33,7 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
     $html .= "<a href='$productLink'><img src='$imageSrc' alt='$productName'></a>";
     $html .= "<div class='product-name'>$productName</div>";
     $html .= "<div class='product-price'>$productPrice</div>";
-    $html .= "<div class='product-description'>$description</div>";
+    // $html .= "<div class='product-description'>$description</div>";
 
 
     
@@ -50,7 +50,7 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         // If user is not logged in or doesn't have necessary privileges, display login prompt
         $html .= "<form action='login.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>Add to Cart  ♡
+        $html .= "<button name='add' class='add-to-cart-btn' data-product-id='$id'>Add to Cart
         </button>";
         $html .= "</form>";
     }
@@ -59,18 +59,18 @@ function generateProductHTML($id, $imageSrc, $productLink, $productName, $produc
         
         $html .= "<form action='wishlist-button.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='wishlist' onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "<button name='wishlist' onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>Add to Wishlist</button>";
         $html .= "</form>";
     } else {
         // If user is not logged in or doesn't have necessary privileges, display login prompt
         $html .= "<form action='login.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
-        $html .= "<button name='wishlist'  onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>ADD to Wishlist</button>";
+        $html .= "<button name='wishlist'  onClick='addToWishlist()' class='add-to-cart-btn' data-product-id='$id'>Add to Wishlist</button>";
         $html .= "</form>";
     }
 
     if (isset($_SESSION['email'])) {
-    if(($_SESSION["userType"] === "admin") || ($_SESSION["userType"] === "superadmin")){
+    if(($_SESSION["userType"] === "superadmin")){
         $html .= "<form action='delete.php' method='post'>";
         $html .= "<input type='hidden' name='product_id' value='$id'>";
         $html .= "<button name='delete'   class='add-to-cart-btn' data-product-id='$id'>Delete</button>";

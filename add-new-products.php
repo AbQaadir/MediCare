@@ -3,7 +3,7 @@ require_once 'config/config-session.php';
 require_once 'config/views/upload.view.php';
 
 $email =$_SESSION["email"];
-echo $email;
+// echo $email;
 ?>
 
 <!DOCTYPE html>

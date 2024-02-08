@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -39,8 +40,11 @@
 </head>
 <body>
     <div class="button-container">
-        <button class="stylish-button"><a href="add-new-products.php">Add Product</a></button>
-        
+        <button class="stylish-button"><a href="add-new-products.php">Add Product</a></button>   
+    </div>
+    <br>
+    <div class="button-container">
+        <button class="stylish-button"><a href="admin.products.php">View all you uploaded products</a></button>
     </div>
 </body>
 </html>

@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($errors) {
             $_SESSION["errors_forgot_password"] = $errors;
 
-            header("Location: ../forgotpassword.php");
+            header("Location: ../forgot-password.php");
             die();
         }
 

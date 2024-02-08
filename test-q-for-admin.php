@@ -176,9 +176,7 @@ echo "</div>";
 // Close database connection
 mysqli_close($con);
 ?>
-    <?php
-require_once 'footer.php';
-?>
+
 
 </body>
 </html>

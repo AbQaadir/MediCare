@@ -2,19 +2,30 @@
 
 declare(strict_types=1);
 
-function showProduct($id, $productName, $productDescription, $productPrice, $productImage)
+function getProductHtml($id, $productName, $productDescription, $productPrice, $productImage)
 {
-    echo "<div class='col-4'>";
-    echo "<div class='card'>";
-    echo "<img src='images/$productImage' class='card-img-top' alt='...'>";
-    echo "<div class='card-body'>";
-    echo "<h5 class='card-title'>$productName</h5>";
-    echo "<p class='card-text'>$productDescription</p>";
-    echo "<p class='card-text'>$productPrice</p>";
-    echo "form action='update.php' method='post'>";
-    echo "<a href='delete.php?id=$id' class='btn btn-danger'>Delete</a>";
-    echo "</form>";
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
+    $html = <<<HTML
+    <div class="col-4">
+        <div class="card">
+            <img src="uploads/{$productImage}" class="card-img-top" alt="{$productImage}">
+            <div class="card-body">
+                <h5 class="card-title">{$productName}</h5>
+                <p class="card-text">{$productDescription}</p>
+                <p class="card-text">{$productPrice}</p>
+                <!-- <form action="update.php" method="post">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <input type="hidden" name="update_id" value="{$id}">
+                </form> -->
+                <form action="config/delete.inc.php" method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <input type="hidden" name="delete_id" value="{$id}">
+                </form>
+            </div>
+        </div>
+    </div>
+HTML;
+    return $html;
 }
+
+
+
