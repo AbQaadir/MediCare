@@ -6,7 +6,7 @@ ini_set('session.use_strict_mode', 1);
 
 // Set session cookie parameters
 session_set_cookie_params([
-    'lifetime' => 1800,       // Cookie lifetime: 30 minutes
+    'lifetime' => 7200,       // Cookie lifetime: 30 minutes
     'domain' => 'localhost',  // Cookie domain
     'path' => '/',            // Cookie path
     'secure' => true,         // Cookie is sent over secure (HTTPS) connections
@@ -23,7 +23,7 @@ if (isset($_SESSION["user_id"])) {
         regenerate_session_id(); // Regenerate session ID for logged-in user
     } else {
         // Regenerate session ID for logged-in user after a certain interval
-        $interval = 60 * 30; // 30 minutes
+        $interval = 60 * 120; // 30 minutes
         if (time() - $_SESSION["last_generation"] >= $interval) {
             regenerate_session_id();
         }
@@ -34,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
         regenerate_session_id(); // Regenerate session ID for non-logged-in user
     } else {
         // Regenerate session ID for non-logged-in user after a certain interval
-        $interval = 60 * 30; // 30 minutes
+        $interval = 60 * 120; // 30 minutes
         if (time() - $_SESSION["last_generation"] >= $interval) {
             regenerate_session_id();
         }

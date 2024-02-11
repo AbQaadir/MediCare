@@ -17,9 +17,9 @@ require_once 'config/views/search.view.php';
 
 <body>
     <main>
-        <div>
-            <h1>Search results</h1>
-        </div>
+    <div style="display: block; justify-content: center; text-align: center;">
+    <h1>Search results</h1>
+</div>
 
         <div class="row">
             <?php

@@ -60,14 +60,14 @@ $sql20 = "INSERT INTO user_details (name, email, telephone, address, user_id)
 mysqli_query($con, $sql20);
 
 // Fetch user details from user_details table
-$sql5 = "SELECT * FROM user_details WHERE user_id ='$userId'";
+$sql5 = "SELECT * FROM shipping_info WHERE ship_email='$email'";
 $result = mysqli_query($con, $sql5);
 $row21 = mysqli_fetch_assoc($result);
 
-$email1 = $row21['email'];
-$name1 = $row21['name'];
-$tel1 = $row21['telephone'];
-$address1 = $row21['address'];
+$email1 = $row21['ship_email'];
+$name1 = $row21['ship_name'];
+$tel1 = $row21['ship_number'];
+$address1 = $row21['ship_address'];
 
 
 
@@ -150,7 +150,7 @@ mysqli_close($con);
     cursor: pointer;
     font-weight: 500;
     font-family: Poppins;
-    width: 20%;
+    width: 100%;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     margin-bottom: 10px;
@@ -385,6 +385,32 @@ mysqli_close($con);
 .popup button[type="button"]:hover {
     background-color: #e60000; /* Darker shade of red on hover */
 }
+@media screen and (max-width: 768px) {
+    .edit_btn {
+        width: 40%; /* Adjust width for smaller screens */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .edit_btn {
+        width: 60%; /* Adjust width for even smaller screens */
+    }
+}
+.checkoutdetails{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.checkoutdetails label{
+    /* margin-right: 100px; */
+    width: 350px;
+}
+
+.withbutton{
+    display: flex  ;
+    flex-direction: row;
+}
 
     
     </style>
@@ -394,13 +420,21 @@ mysqli_close($con);
     <div class="container">
         <div class="all">
             <div class="big">
-                
-                    <label for="name">Deliver to : <?php echo $name1; ?></label><br/>
-                    <label for="email">Email to : <?php echo  $email1; ?></label><br />
-                    <label for="telephone">Telephone Number :<?php echo $tel1; ?> </label><br />
-                    <label for="address">Home Address:<?php echo "<label style='color: red;'>".$address1."</label>"; ?></label><br />
 
-                    <button class="edit_btn" onclick="openPopup()">change</button>
+            <div class="withbutton"> <div class="details"><div class="checkoutdetails"><label for="name"> <b> Deliver to :</b> <?php echo $name1; ?></label><br/><br>
+                    <label for="email"><b>Email to :</b> <?php echo  $email1; ?></label><br /></div>
+                
+                    <div class="checkoutdetails"><label for="telephone"><b> Number :</b><?php echo $tel1; ?> </label><br ><br>
+                    <label for="address"><b> Address : </b><?php echo "<label style='color: red;'>".$address1."</label>"; ?></label><br /></div>        </div>
+
+            
+                    
+<form action="updateShipping.php">
+<button type='sumbit' class="edit_btn" >change</button></div>
+</form>
+                   
+
+           
 
 <!-- Popup container -->
 <div class="popup" id="popup">

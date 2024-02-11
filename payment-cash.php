@@ -13,7 +13,7 @@ $result = mysqli_query($con, $sql5);
 $row1 = mysqli_fetch_assoc($result);
 $userId = $row1['user_id'];
 
-if (isset($_POST['checkout'])) {
+
     // Loop through each product in the cart and insert into the 'pay' table
     $sql13 = "SELECT product_id, qty FROM cart WHERE user_id='$userId'";
     $result13 = mysqli_query($con, $sql13);
@@ -47,7 +47,7 @@ if (isset($_POST['checkout'])) {
 
 
         }
-    }
+    
 
     $count = count($idOut);
     $count2 = count($idOut2);

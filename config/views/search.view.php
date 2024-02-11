@@ -1,6 +1,6 @@
 <?php
-
 declare(strict_types=1);
+
 
 function checkSearchErrors()
 {
@@ -68,3 +68,4 @@ function showAllSearchResults(array $results)
         searchProductHTML($id, $imageSrc, $productLink, $productName, $productPrice);
     }
 }
+

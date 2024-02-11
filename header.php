@@ -40,14 +40,17 @@ require_once 'config/config-session.php';
 	<header class="main-header">
 		<nav class="navbar">
 			<ul class="main-menu">
-				<li>
-					<h1>MediCare</h1>
+				<li><a href="index.php"><h1>MediCare</h1></a></li>
+					
 				</li>
 
-				<form action="config/search.inc.php" method="POST">
+				<form action="config/search.inc.php" style="display: flex; flex-direction: row;" method="POST" >
+					<li class="searchbar">
+						<input type="text" name="keyword" placeholder="Eye" style="padding: 5px 5px; margin-left: 10px; width:200px; border-radius:20px 0px 0px 20px">
+					</li>
 					<li>
-						<input type="text" name="keyword" placeholder="Eye" style="padding: 5px 5px; margin-left: 10px; width: 200px;">
-						<button type="submit" style="padding: 5px 5px; background-color: white; color: black;">Search</button>
+					<button type="submit" style="padding: 5px 5px; background-color: white; color: black; border-radius:0px 20px 20px 0px"">Search</button>
+
 					</li>
 				</form>
 
@@ -59,12 +62,11 @@ require_once 'config/config-session.php';
 
 
 
-				<li><a href="index.php">Home</a></li>
-				<li><a href="#">Blog<i class="ti-angle-down"></i></a>
+				<!-- <li><a href="#">Blog<i class="ti-angle-down"></i></a>
 					<ul class="dropdown">
 						<li><a href="blog-single-sidebar.php">Blog Single Sidebar</a></li>
 					</ul>
-				</li>
+				</li> -->
 				<li><a href="contact-us.php">Contact Us</a></li>
 				<?php
 				

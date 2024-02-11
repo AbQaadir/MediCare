@@ -139,6 +139,9 @@ else if (isset($_GET['action'])) {
     $result1 = mysqli_query($con, $sql1);
     $sql11 = "DELETE FROM cart WHERE product_id = '$id' AND user_id ='$userId' ";
     $result11 = mysqli_query($con, $sql11);
+
+    header('Location: cart-new.php');
+    exit;
 }
 
 }else{
@@ -577,7 +580,7 @@ else if (isset($_GET['action'])) {
 
                 <hr>
 
-                <form action="payment-cash.php" method="post">
+                <form action="shipping.php" method="post">
                     <div class="bt">
                         <button id="checkout" name="checkout" type="submit" class="checkout"> PROCEED TO CHECKOUT (<?php echo $counts ?>)</button>
                     </div>

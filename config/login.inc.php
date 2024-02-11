@@ -100,6 +100,7 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
   $row30 = mysqli_fetch_assoc($result30);
 
   if ($row30['qty_p'] == 0) {
+    unset($_SESSION["p_id"]);
     echo "<script>alert('Product is out of stock..!'); window.location.href = '../index.php';</script>";
     echo "<script>document.querySelector('script:last-of-type').style.backgroundColor = 'red';</script>";
   } else {
@@ -110,6 +111,7 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
 
 
       if ((in_array($_POST['product_id'], $idArray))) {
+        unset($_SESSION["p_id"]);
 
         echo "<script>alert('product is already added in the cart..!'); window.location.href = '../index.php'; </script>";
       } else {
@@ -130,12 +132,14 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
         $userId = $row1['user_id'];
         $sql6 = "INSERT INTO cart (user_id, product_id) VALUES ('$userId', '$product_id' )";
         $update_quantity_query1 = mysqli_query($con, $sql6);
+        unset($_SESSION["p_id"]);
 
         header('location:../cart-new.php');
       }
     } else {
 
       if ((in_array($_SESSION["p_id"], $idArray))) {
+        unset($_SESSION["p_id"]);
 
 
         echo "<script>alert('product is already added in the cart..!'); window.location.href = '../index.php';</script>";
@@ -158,13 +162,15 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
         $sql6 = "INSERT INTO cart (user_id, product_id) VALUES ('$userId', '$product_id' )";
         $update_quantity_query1 = mysqli_query($con, $sql6);
 
+ unset($_SESSION["p_id"]);
         header('location:../cart-new.php');
+       
       }
     }
   }}else{
 
     if(isset($_SESSION['direct-to-cart'])){
-
+      unset($_SESSION['direct-to-cart']);
         echo "<script>window.location.href = '../cart-new.php';</script>";
         $pdo = null;
         $state = null;
@@ -172,16 +178,20 @@ while ($row8 = mysqli_fetch_assoc($result8)) {
         
 
     }else if(isset($_SESSION['direct-to-wish'])){
+      unset($_SESSION['direct-to-wish']);
       echo "<script>window.location.href = '../wishlist.php';</script>";
+      $pdo = null;
+      $state = null;
+      exit();
+    }else{
+
+      header('location: ../index.php');
       $pdo = null;
       $state = null;
       exit();
     }
 
-    header('location: ../index.php');
-        $pdo = null;
-        $state = null;
-        exit();
+   
 
   }
 

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 // delete a product by id
 
-
 function getALLProductByEmail(object $pdo, string $email): array
 {
-    $query = "SELECT * FROM products WHERE email = :email;";
+    $query = "SELECT * FROM products WHERE adminEmail = :email;";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':email', $email);
     $stmt->execute();

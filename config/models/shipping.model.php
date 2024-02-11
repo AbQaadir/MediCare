@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+
+
+
 function checkEmail(object $pdo, string $email)
 {
-    $query = "SELECT * FROM shipping_info WHERE email = :email";
+    $query = "SELECT * FROM shipping_info WHERE ship_email = :email";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -25,13 +28,13 @@ function recentShoppingInfo(object $pdo, string $email)
     return $result;
 }
 
-function addShippingInfo(object $pdo, string $ship_name, string $ship_email, string $ship_phone, string $ship_address, string $ship_city, string $ship_zip, string $ship_country)
+function addShippingInfo(object $pdo, string $ship_name, string $ship_email, string $ship_number, string $ship_address, string $ship_city, string $ship_zip, string $ship_country)
 {
-    $query = "INSERT INTO shipping_info (ship_name, ship_email, ship_phone, ship_address, ship_city, ship_zip, ship_country) VALUES (:ship_name, :ship_email, :ship_phone, :ship_address, :ship_city, :ship_zip, :ship_country)";
+    $query = "INSERT INTO shipping_info (ship_name, ship_email, ship_number, ship_address, ship_city, ship_zip, ship_country) VALUES (:ship_name, :ship_email, :ship_number, :ship_address, :ship_city, :ship_zip, :ship_country)";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':ship_name', $ship_name);
     $stmt->bindParam(':ship_email', $ship_email);
-    $stmt->bindParam(':ship_phone', $ship_phone);
+    $stmt->bindParam(':ship_number', $ship_number);
     $stmt->bindParam(':ship_address', $ship_address);
     $stmt->bindParam(':ship_city', $ship_city);
     $stmt->bindParam(':ship_zip', $ship_zip);
