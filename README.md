@@ -64,6 +64,10 @@ Welcome to Medicare, your one-stop destination for all your medical needs.
 ### Super Admin Views
 - **Admin Management**: Superadmins can manage admin accounts, including adding and removing admin privileges.
 - **User Management**: Superadmins can view user accounts.
+#
+![Users](screen_shots/users.jpg)
+#
 - **Admin Viewing**: Superadmins can view admin accounts.
-
-#### Example Images:
+#
+![Order Details](screen_shots/admins.jpg)
+#
