@@ -6,8 +6,10 @@ Welcome to Medicare, your one-stop destination for all your medical needs.
 
 ### User Authentication
 - **Login System**: Users can securely log in to their accounts.
+![Login Page](screen_shots/login.png)
 - **Forgot Password System**: Users can reset their passwords if forgotten.
 - **Signup System**: New users can create accounts to access the platform.
+![Signup](screen_shots/signup.png)
 
 
 ### User Views
@@ -30,3 +32,6 @@ Welcome to Medicare, your one-stop destination for all your medical needs.
 - **Admin Management**: Superadmins can manage admin accounts, including adding and removing admin privileges.
 - **User Management**: Superadmins can view user accounts.
 - **Admin Viewing**: Superadmins can view admin accounts.
+
+#### Example Images:
+![Product Management](/path/to/product_management_image.png)
