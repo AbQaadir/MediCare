@@ -2,22 +2,37 @@
 
 Welcome to Medicare, your one-stop destination for all your medical needs.
 
+#
+![Home](screen_shots/home.png)
+#
+
 ## Features
 
 ### User Authentication
-- **Login System**: Users can securely log in to their accounts.
+- **Login System** : Users can securely log in to their accounts.
+#
 ![Login Page](screen_shots/login.png)
-- **Forgot Password System**: Users can reset their passwords if forgotten.
+#
+- **Forgot Password System** : Users can reset their passwords if forgotten.
+#
 ![Forgot Password](screen_shots/forgot_password.jpg)
-- **Signup System**: New users can create accounts to access the platform.
+#
+- **Signup System** : New users can create accounts to access the platform.
 ![Signup](screen_shots/signup.png)
-
+#
 
 ### User Views
 - **Register User View**: Allows users to register for an account.
 - **Login**: Registered users can securely log in to their accounts.
 - **Add to Cart**: Users can add products to their shopping cart.
+#
+![Add to Cart](screen_shots/cart.png)
+#
+
 - **Wishlist**: Users can add products to their wishlist for future reference.
+#
+![Wish List](screen_shots/whishlist.png)
+#
 - **Search Bar**: Users can search for products using a search bar.
 - **Ordering**: Users can place orders for products.
 - **Profile Management**: Users can update their profile with shipping details.
