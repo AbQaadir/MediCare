@@ -1,10 +1,14 @@
 # Medicare
-
 Welcome to Medicare, your one-stop destination for all your medical needs.
-
 #
 ![Home](screen_shots/home.png)
 #
+
+## Database Access
+
+- **Register user** : email - mamamhar254@gmail.com  / password - 111
+- **Admin User** : soloqaadir@gmail.com / password - 1234
+- **Super Admin** : email - superadmin@example.com / password - 123
 
 ## Features
 
@@ -52,6 +56,9 @@ Welcome to Medicare, your one-stop destination for all your medical needs.
 - **Admin Registration**: Superadmins can register new admins.
 - **Login**: Admins can securely log in to the system.
 - **Product Management**: Admins can add and delete products.
+#
+![Admin products](screen_shots/admin%20product%20delete.jpg)
+#
 - **Order Management**: Admins can view order details, manage orders, and update order statuses.
 #
 ![Order Details](screen_shots/cart.png)
@@ -63,6 +70,10 @@ Welcome to Medicare, your one-stop destination for all your medical needs.
 
 ### Super Admin Views
 - **Admin Management**: Superadmins can manage admin accounts, including adding and removing admin privileges.
+#
+![Delete products](screen_shots/super%20admin%20product%20delete.jpg)
+
+#
 - **User Management**: Superadmins can view user accounts.
 #
 ![Users](screen_shots/users.jpg)
